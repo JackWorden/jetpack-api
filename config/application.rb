@@ -15,6 +15,10 @@ require "sprockets/railtie"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+# Load variables from application.yml file located in the config/ directory
+CONFIG = YAML.load(File.read(File.expand_path('../application.yml', __FILE__)))
+CONFIG.merge! CONFIG.fetch(Rails.env, {})
+
 module JetpackApi
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
