@@ -1,0 +1,17 @@
+AllCops:
+  Exclude:
+    - config/**/*
+    - db/**/*
+    - bin/*
+
+MethodLength:
+  Max: 10
+
+ClassLength:
+  Max: 100
+
+Documentation:
+  Enabled: false
+
+LineLength:
+  Max: 100
