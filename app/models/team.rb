@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: teams
+# Table name: public.teams
 #
 #  id         :integer          not null, primary key
 #  name       :string           not null
