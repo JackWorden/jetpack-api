@@ -9,4 +9,18 @@
 #
 
 class Team < ActiveRecord::Base
+  after_create :create_schema
+  after_destroy :drop_schema
+
+  delegate :schema_name, :switch, :create_schema, :drop_schema, to: :schema_manager
+
+  def self.current
+    Apartment::Tenant.current
+  end
+
+  private
+
+  def schema_manager
+    SchemaManager.new(self)
+  end
 end
