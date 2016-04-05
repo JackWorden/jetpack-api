@@ -9,4 +9,6 @@
 
 class Sprint < ActiveRecord::Base
   belongs_to :project
+  has_many :stories
+  has_many :issues
 end
