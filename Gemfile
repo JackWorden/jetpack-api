@@ -8,6 +8,7 @@ gem 'pundit'
 gem 'active_model_serializers', github: 'rails-api/active_model_serializers'
 gem 'bcrypt', '~> 3.1.7'
 gem 'octokit', '~> 4.0'
+gem 'omniauth-github'
 
 group :production do
   gem 'rails_12factor'
