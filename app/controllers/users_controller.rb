@@ -2,8 +2,12 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show]
 
   def from_token
-    user = User.first_or_create(github_access_token: params[:token])
-    render json: user
+    if params[:token]
+      user = User.first_or_create(github_access_token: params[:token])
+      render json: user, status: 200
+    else
+      render json: { errors: 'No access token given' }, status: 500
+    end
   end
 
   def show
