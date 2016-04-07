@@ -1,7 +1,13 @@
 Rails.application.routes.draw do
   resources :projects, except: [:new, :edit]
   resources :teams, except: [:new, :edit]
-  resources :users, except: [:new, :edit]
+
+  resources :users do
+    collection do
+      get 'from_token'
+    end
+  end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
