@@ -3,10 +3,9 @@ class UsersController < ApplicationController
 
   def from_token
     if params[:token]
-      user = User.first_or_create(github_access_token: params[:token])
-      render json: user, status: 200
+      render json: user_from_id, status: 200
     else
-      render json: { errors: 'No access token given' }, status: 500
+      render json: { errors: 'No access token given' }, status: 400
     end
   end
 
@@ -15,6 +14,20 @@ class UsersController < ApplicationController
   end
 
   private
+
+  def user_from_id
+    user = User.find_by_github_user_id(github_id)
+    return user if user
+    User.create(github_user_id: github_id, name: octokit.user[:login])
+  end
+
+  def github_id
+    octokit.user[:id]
+  end
+
+  def octokit
+    @octokit ||= Octokit::Client.new(access_token: params[:token])
+  end
 
   def set_user
     @user = User.find(params[:id])
