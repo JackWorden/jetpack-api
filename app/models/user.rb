@@ -5,7 +5,7 @@
 #  id         :integer          not null, primary key
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  team_id_id :integer
+#  team_id    :integer
 #  uid        :integer
 #  name       :string
 #
