@@ -16,9 +16,9 @@ class UsersController < ApplicationController
   private
 
   def user_from_id
-    user = User.find_by_github_user_id(github_id)
+    user = User.find_by_github_id(github_id)
     return user if user
-    User.create(github_user_id: github_id, name: octokit.user[:login])
+    User.create(github_id: github_id, name: octokit.user[:login])
   end
 
   def github_id
