@@ -1,4 +1,4 @@
-module Api
+module API
   class UserFinder
     def initialize(token)
       @token = token

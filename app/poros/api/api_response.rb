@@ -1,4 +1,4 @@
-module Api
+module API
   class ApiResponse
     attr_reader :data, :status
 
