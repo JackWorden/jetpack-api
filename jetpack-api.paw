@@ -5,7 +5,7 @@
     <databaseInfo>
         <version>134481920</version>
         <UUID>D5F26DE6-2F2D-4F48-9ADD-36DCA775F607</UUID>
-        <nextObjectID>113</nextObjectID>
+        <nextObjectID>121</nextObjectID>
         <metadata>
             <plist version="1.0">
                 <dict>
@@ -73,9 +73,9 @@
     <object type="LMENVIRONMENTVARIABLE" id="z103">
         <attribute name="uuid" type="string">6D4C91E2-8496-4515-8C1E-CA408964C601</attribute>
         <attribute name="order" type="int64">0</attribute>
-        <attribute name="name" type="string"></attribute>
+        <attribute name="name" type="string">github_token</attribute>
         <relationship name="domain" type="0/1" destination="LMENVIRONMENTDOMAIN" idrefs="z105"></relationship>
-        <relationship name="values" type="0/0" destination="LMENVIRONMENTVARIABLEVALUE" idrefs="z107"></relationship>
+        <relationship name="values" type="0/0" destination="LMENVIRONMENTVARIABLEVALUE" idrefs="z117 z107"></relationship>
     </object>
     <object type="LMCOOKIEJAR" id="z104">
         <attribute name="uuid" type="string">06C02F29-CBE6-4F9B-B8CD-90D371291FF7</attribute>
@@ -85,25 +85,25 @@
     <object type="LMENVIRONMENTDOMAIN" id="z105">
         <attribute name="uuid" type="string">3531EC95-C8CF-4F1C-81E1-DD588024CCE8</attribute>
         <attribute name="order" type="int64">0</attribute>
-        <attribute name="name" type="string">Default Domain</attribute>
-        <relationship name="environments" type="0/0" destination="LMENVIRONMENT" idrefs="z106"></relationship>
+        <attribute name="name" type="string">User</attribute>
+        <relationship name="environments" type="0/0" destination="LMENVIRONMENT" idrefs="z119 z106"></relationship>
         <relationship name="variables" type="0/0" destination="LMENVIRONMENTVARIABLE" idrefs="z103"></relationship>
     </object>
     <object type="LMENVIRONMENT" id="z106">
         <attribute name="uuid" type="string">CEE93203-5C78-4104-ABED-2118B5A7E65C</attribute>
         <attribute name="order" type="int64">0</attribute>
-        <attribute name="name" type="string">Default Environment</attribute>
+        <attribute name="name" type="string">Jack</attribute>
         <relationship name="domain" type="0/1" destination="LMENVIRONMENTDOMAIN" idrefs="z105"></relationship>
         <relationship name="variablesvalues" type="0/0" destination="LMENVIRONMENTVARIABLEVALUE" idrefs="z107"></relationship>
     </object>
     <object type="LMENVIRONMENTVARIABLEVALUE" id="z107">
-        <attribute name="value" type="string"></attribute>
+        <attribute name="value" type="string">[{"data":{"value":"030119F82D6CA77B1ABEC7D1AE4DAF7F613409E2027C3CAD7FB14F03F8718D9B3B9ED8F76119C31BA09B67BD5D76A3A75B054E65AF8E2D3D8BD513286E4EF326D74BFCF364C0B13B824C19E565841DB0C5AB634641E89C1EAAE6287CCB86A08B5CE8BF5F80B9953378DCF112787D85597D84","keyUUID":"05E57B50-F8D7-4C74-BE84-10BC98A5BC27","mode":0},"identifier":"com.luckymarmot.SecureDynamicValue"}]</attribute>
         <relationship name="environment" type="1/1" destination="LMENVIRONMENT" idrefs="z106"></relationship>
         <relationship name="variable" type="1/1" destination="LMENVIRONMENTVARIABLE" idrefs="z103"></relationship>
     </object>
     <object type="LMREQUEST" id="z108">
         <attribute name="uuid" type="string">51E7BE3C-6AFF-415D-B1C9-ABD4689D225E</attribute>
-        <attribute name="url" type="string">["http:\\/\\/localhost:3000\\/users\\/from_token?token=",{"data":{"environmentVariable":"7C2707F8-60AD-4CC9-9080-D42AA70BFA7D"},"identifier":"com.luckymarmot.EnvironmentVariableDynamicValue"}]</attribute>
+        <attribute name="url" type="string">[{"data":{"environmentVariable":"7C2707F8-60AD-4CC9-9080-D42AA70BFA7D"},"identifier":"com.luckymarmot.EnvironmentVariableDynamicValue"},"\\/users\\/from_token?token=",{"data":{"environmentVariable":"6D4C91E2-8496-4515-8C1E-CA408964C601"},"identifier":"com.luckymarmot.EnvironmentVariableDynamicValue"}]</attribute>
         <attribute name="storecookies" type="bool">1</attribute>
         <attribute name="sendcookies" type="bool">1</attribute>
         <attribute name="redirectmethod" type="bool">0</attribute>
@@ -119,27 +119,27 @@
     <object type="LMENVIRONMENTVARIABLE" id="z109">
         <attribute name="uuid" type="string">7C2707F8-60AD-4CC9-9080-D42AA70BFA7D</attribute>
         <attribute name="order" type="int64">0</attribute>
-        <attribute name="name" type="string">github_token</attribute>
+        <attribute name="name" type="string">base</attribute>
         <relationship name="domain" type="0/1" destination="LMENVIRONMENTDOMAIN" idrefs="z112"></relationship>
-        <relationship name="values" type="0/0" destination="LMENVIRONMENTVARIABLEVALUE" idrefs="z110"></relationship>
+        <relationship name="values" type="0/0" destination="LMENVIRONMENTVARIABLEVALUE" idrefs="z115 z114 z110 z118"></relationship>
     </object>
     <object type="LMENVIRONMENTVARIABLEVALUE" id="z110">
-        <attribute name="value" type="string">[{"data":{"value":"030119F82D6CA77B1ABEC7D1AE4DAF7F613409E2027C3CAD7FB14F03F8718D9B3B9ED8F76119C31BA09B67BD5D76A3A75B054E65AF8E2D3D8BD513286E4EF326D74BFCF364C0B13B824C19E565841DB0C5AB634641E89C1EAAE6287CCB86A08B5CE8BF5F80B9953378DCF112787D85597D84","keyUUID":"05E57B50-F8D7-4C74-BE84-10BC98A5BC27","mode":0},"identifier":"com.luckymarmot.SecureDynamicValue"}]</attribute>
+        <attribute name="value" type="string">http://jetpack-api.dev</attribute>
         <relationship name="environment" type="1/1" destination="LMENVIRONMENT" idrefs="z111"></relationship>
         <relationship name="variable" type="1/1" destination="LMENVIRONMENTVARIABLE" idrefs="z109"></relationship>
     </object>
     <object type="LMENVIRONMENT" id="z111">
         <attribute name="uuid" type="string">39994832-EFAB-429B-BE57-55C9721269BD</attribute>
         <attribute name="order" type="int64">0</attribute>
-        <attribute name="name" type="string">Default Environment</attribute>
+        <attribute name="name" type="string">1 - Local</attribute>
         <relationship name="domain" type="0/1" destination="LMENVIRONMENTDOMAIN" idrefs="z112"></relationship>
         <relationship name="variablesvalues" type="0/0" destination="LMENVIRONMENTVARIABLEVALUE" idrefs="z110"></relationship>
     </object>
     <object type="LMENVIRONMENTDOMAIN" id="z112">
         <attribute name="uuid" type="string">A6447C9A-1F31-4FA1-87A2-BBEC3519E844</attribute>
         <attribute name="order" type="int64">1</attribute>
-        <attribute name="name" type="string">Jetpack-Jack</attribute>
-        <relationship name="environments" type="0/0" destination="LMENVIRONMENT" idrefs="z111"></relationship>
+        <attribute name="name" type="string">Server</attribute>
+        <relationship name="environments" type="0/0" destination="LMENVIRONMENT" idrefs="z116 z120 z111 z121"></relationship>
         <relationship name="variables" type="0/0" destination="LMENVIRONMENTVARIABLE" idrefs="z109"></relationship>
     </object>
     <object type="LMREQUESTGROUP" id="z113">
@@ -151,5 +151,53 @@
         <relationship name="bodyparameters" type="0/0" destination="LMKEYVALUE"></relationship>
         <relationship name="headers" type="0/0" destination="LMKEYVALUE"></relationship>
         <relationship name="urlparameters" type="0/0" destination="LMKEYVALUE"></relationship>
+    </object>
+    <object type="LMENVIRONMENTVARIABLEVALUE" id="z114">
+        <attribute name="value" type="string">https://jetpack-development.herokuapp.com</attribute>
+        <relationship name="environment" type="1/1" destination="LMENVIRONMENT" idrefs="z116"></relationship>
+        <relationship name="variable" type="1/1" destination="LMENVIRONMENTVARIABLE" idrefs="z109"></relationship>
+    </object>
+    <object type="LMENVIRONMENTVARIABLEVALUE" id="z115">
+        <attribute name="value" type="string">http://localhost:8000</attribute>
+        <relationship name="environment" type="1/1" destination="LMENVIRONMENT" idrefs="z121"></relationship>
+        <relationship name="variable" type="1/1" destination="LMENVIRONMENTVARIABLE" idrefs="z109"></relationship>
+    </object>
+    <object type="LMENVIRONMENT" id="z116">
+        <attribute name="uuid" type="string">DF3E1DD0-A281-4319-B43E-2C55D9DA8E40</attribute>
+        <attribute name="order" type="int64">2</attribute>
+        <attribute name="name" type="string">2 - Development</attribute>
+        <relationship name="domain" type="0/1" destination="LMENVIRONMENTDOMAIN" idrefs="z112"></relationship>
+        <relationship name="variablesvalues" type="0/0" destination="LMENVIRONMENTVARIABLEVALUE" idrefs="z114"></relationship>
+    </object>
+    <object type="LMENVIRONMENTVARIABLEVALUE" id="z117">
+        <attribute name="value" type="string">[{"data":{"value":"0301BA4691E789AB895ADB3EC84EDB50A9CC187E4BF129475F7EF0A2C1672517BEACD4E42C5E99D472A9A6D31DE8FE8874990A7E1A453B5041F4F929AA7A3795046472F43C278F1294F2020E25A7025D188DDC13978623804969566A21EFB8C0D20F2983683FD62F2A7072BE58F169EF5706","keyUUID":"05E57B50-F8D7-4C74-BE84-10BC98A5BC27","mode":0},"identifier":"com.luckymarmot.SecureDynamicValue"}]</attribute>
+        <relationship name="environment" type="1/1" destination="LMENVIRONMENT" idrefs="z119"></relationship>
+        <relationship name="variable" type="1/1" destination="LMENVIRONMENTVARIABLE" idrefs="z103"></relationship>
+    </object>
+    <object type="LMENVIRONMENTVARIABLEVALUE" id="z118">
+        <attribute name="value" type="string">https://jetpack-staging.herokuapp.com</attribute>
+        <relationship name="environment" type="1/1" destination="LMENVIRONMENT" idrefs="z120"></relationship>
+        <relationship name="variable" type="1/1" destination="LMENVIRONMENTVARIABLE" idrefs="z109"></relationship>
+    </object>
+    <object type="LMENVIRONMENT" id="z119">
+        <attribute name="uuid" type="string">2B6038CF-EDB9-4700-95BE-30D83288EB9B</attribute>
+        <attribute name="order" type="int64">1</attribute>
+        <attribute name="name" type="string">Steven</attribute>
+        <relationship name="domain" type="0/1" destination="LMENVIRONMENTDOMAIN" idrefs="z105"></relationship>
+        <relationship name="variablesvalues" type="0/0" destination="LMENVIRONMENTVARIABLEVALUE" idrefs="z117"></relationship>
+    </object>
+    <object type="LMENVIRONMENT" id="z120">
+        <attribute name="uuid" type="string">119E9FE4-B050-483E-908A-616E396ACFC4</attribute>
+        <attribute name="order" type="int64">3</attribute>
+        <attribute name="name" type="string">3 - Staging</attribute>
+        <relationship name="domain" type="0/1" destination="LMENVIRONMENTDOMAIN" idrefs="z112"></relationship>
+        <relationship name="variablesvalues" type="0/0" destination="LMENVIRONMENTVARIABLEVALUE" idrefs="z118"></relationship>
+    </object>
+    <object type="LMENVIRONMENT" id="z121">
+        <attribute name="uuid" type="string">B797DD08-8FF1-4634-A743-FC50E669F836</attribute>
+        <attribute name="order" type="int64">1</attribute>
+        <attribute name="name" type="string">1 - Local (without Pow)</attribute>
+        <relationship name="domain" type="0/1" destination="LMENVIRONMENTDOMAIN" idrefs="z112"></relationship>
+        <relationship name="variablesvalues" type="0/0" destination="LMENVIRONMENTVARIABLEVALUE" idrefs="z115"></relationship>
     </object>
 </database>
