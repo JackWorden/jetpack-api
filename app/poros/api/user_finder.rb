@@ -6,9 +6,9 @@ module API
 
     def call
       if token
-        ApiResponse.new(user_from_id)
+        Response.new(user_from_id)
       else
-        ApiResponse.new({ errors: 'No access token given' }, :bad_request)
+        ErrorResponse.new('No access token given', :bad_request)
       end
     end
 
