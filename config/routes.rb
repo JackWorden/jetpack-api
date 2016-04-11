@@ -1,10 +1,9 @@
 Rails.application.routes.draw do
-  resources :projects, except: [:new, :edit]
-  resources :teams, except: [:new, :edit]
-
-  resources :users do
+  resources :users, only: [:show] do
     collection do
       get 'from_token'
     end
   end
+
+  resource :teams, only: [:show, :create, :destroy]
 end
