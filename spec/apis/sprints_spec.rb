@@ -60,7 +60,7 @@ describe 'Sprints Requests', :no_auth, type: :api do
 
       it 'should return the sprint' do
         get sprint_path(sprint)
-        expect(response_body_json['id']).to eq sprint.id
+        expect(response_body_json['id']).to eq sprint.id.to_s
       end
     end
 
@@ -86,7 +86,7 @@ describe 'Sprints Requests', :no_auth, type: :api do
 
       it 'should update the sprint and return it' do
         put sprint_path(sprint), params
-        expect(response_body_json['project_id']).to eq new_project.id
+        expect(response_attributes_json['project-id']).to eq new_project.id
       end
     end
 
