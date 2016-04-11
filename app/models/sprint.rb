@@ -11,4 +11,6 @@ class Sprint < ActiveRecord::Base
   belongs_to :project
   has_many :stories
   has_many :issues
+
+  validates :project, presence: true
 end
