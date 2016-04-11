@@ -1,59 +1,32 @@
 class TeamsController < ApplicationController
-  before_action :set_team, only: [:show, :update, :destroy]
+  before_action :set_team, except: [:create]
 
-  # GET /teams
-  # GET /teams.json
-  def index
-    @teams = Team.all
-
-    render json: @teams
-  end
-
-  # GET /teams/1
-  # GET /teams/1.json
-  def show
-    render json: @team
-  end
-
-  # POST /teams
-  # POST /teams.json
   def create
-    @team = Team.new(team_params)
-
-    if @team.save
-      render json: @team, status: :created, location: @team
-    else
-      render json: @team.errors, status: :unprocessable_entity
-    end
+    api_response = API::TeamCreator.new(team_params, current_user).call
+    render json: api_response.data, status: api_response.status
   end
 
-  # PATCH/PUT /teams/1
-  # PATCH/PUT /teams/1.json
-  def update
-    @team = Team.find(params[:id])
-
-    if @team.update(team_params)
-      head :no_content
-    else
-      render json: @team.errors, status: :unprocessable_entity
-    end
+  def show
+    return render json: { errors: 'User has no team' }, status: :bad_request unless @team
+    render json: @current_user.team
   end
 
-  # DELETE /teams/1
-  # DELETE /teams/1.json
   def destroy
-    @team.destroy
+    return render json: { errors: 'User has no team' }, status: :bad_request unless @team
 
-    head :no_content
+    @team.destroy
+    render text: 'Team successfully deleted'
+  rescue => e
+    render json: { errors: "Deletion failed: #{e.message}" }, status: :internal_server_error
   end
 
   private
 
-    def set_team
-      @team = Team.find(params[:id])
-    end
+  def set_team
+    @team = current_user.team
+  end
 
-    def team_params
-      params[:team]
-    end
+  def team_params
+    params[:team].permit(:name)
+  end
 end
