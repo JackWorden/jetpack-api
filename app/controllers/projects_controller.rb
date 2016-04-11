@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :find_project, only: %i(show update destroy)
+  before_action :set_project, only: %i(show update destroy)
 
   def index
     render json: Project.all, status: :ok
@@ -33,7 +33,7 @@ class ProjectsController < ApplicationController
 
   private
 
-  def find_project
+  def set_project
     @project = Project.find_by_id(params[:id])
     render nothing: true, status: :bad_request unless @project
   end
