@@ -14,8 +14,12 @@ class ProjectsController < ApplicationController
   end
 
   def destroy
-    @project.destroy
-    render nothing: true, status: :no_content
+    if @project
+      @project.destroy
+      render nothing: true, status: :no_content
+    else
+      render nothing: true, status: :bad_request
+    end
   end
 
   def create
@@ -28,14 +32,17 @@ class ProjectsController < ApplicationController
   end
 
   def show
-    render json: @project, status: :ok
+    if @project
+      render json: @project, status: :ok
+    else
+      render nothing: true, status: :bad_request
+    end
   end
 
   private
 
   def set_project
     @project = Project.find_by_id(params[:id])
-    render nothing: true, status: :bad_request unless @project
   end
 
   def project_params
