@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  resources :projects
+  resources :projects, except: [:edit, :new]
+
 
   resources :users do
     collection do
