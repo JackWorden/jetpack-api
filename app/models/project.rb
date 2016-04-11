@@ -9,6 +9,8 @@
 #
 
 class Project < ActiveRecord::Base
+  belongs_to :team
+
   has_many :sprints
   belongs_to :active_sprint, class_name: 'Sprint'
   has_many :stories
