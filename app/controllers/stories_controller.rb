@@ -7,8 +7,14 @@ class StoriesController < ApplicationController
   end
 
   def show
-    @story = Story.find(params[:id])
     render json: @story
+  end
+
+  def destroy
+    @story.destroy
+    render nothing: true, status: :no_content
+  rescue => e
+    render json: "Error: #{e.message}", status: :internal_server_error
   end
 
   private

@@ -5,7 +5,11 @@
     <databaseInfo>
         <version>134481920</version>
         <UUID>D5F26DE6-2F2D-4F48-9ADD-36DCA775F607</UUID>
+<<<<<<< 353e83ba6c61290db77430c3555d5af41d09a690
         <nextObjectID>162</nextObjectID>
+=======
+        <nextObjectID>135</nextObjectID>
+>>>>>>> Adds routes and destroy action to StoriesController.
         <metadata>
             <plist version="1.0">
                 <dict>
@@ -251,7 +255,11 @@
         <attribute name="order" type="int64">3</attribute>
         <attribute name="name" type="string">teams</attribute>
         <relationship name="parent" type="0/1" destination="LMREQUESTTREEITEM"></relationship>
+<<<<<<< 353e83ba6c61290db77430c3555d5af41d09a690
         <relationship name="children" type="0/0" destination="LMREQUESTTREEITEM" idrefs="z127 z133 z130"></relationship>
+=======
+        <relationship name="children" type="0/0" destination="LMREQUESTTREEITEM" idrefs="z133 z130 z127"></relationship>
+>>>>>>> Adds routes and destroy action to StoriesController.
         <relationship name="bodyparameters" type="0/0" destination="LMKEYVALUE"></relationship>
         <relationship name="headers" type="0/0" destination="LMKEYVALUE"></relationship>
         <relationship name="urlparameters" type="0/0" destination="LMKEYVALUE"></relationship>
@@ -361,6 +369,7 @@
         <relationship name="headers" type="0/0" destination="LMKEYVALUE"></relationship>
         <relationship name="urlparameters" type="0/0" destination="LMKEYVALUE"></relationship>
     </object>
+<<<<<<< 353e83ba6c61290db77430c3555d5af41d09a690
     <object type="LMREQUESTGROUP" id="z136">
         <attribute name="uuid" type="string">0F7F52E8-ED14-4234-8446-0961AD6230B5</attribute>
         <attribute name="order" type="int64">1</attribute>
@@ -548,4 +557,6 @@
         <relationship name="groupforurlparameters" type="0/1" destination="LMREQUESTGROUP"></relationship>
         <relationship name="request" type="0/1" destination="LMREQUEST" idrefs="z148"></relationship>
     </object>
+=======
+>>>>>>> Adds routes and destroy action to StoriesController.
 </database>
