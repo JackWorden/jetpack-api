@@ -1,10 +1,11 @@
 class ProjectsController < ApplicationController
+  before_action :find_project, only: %i(show update destroy)
+
   def index
     render json: Project.all, status: :ok
   end
 
   def update
-    @project = Project.find(project_params[:id])
     if @project.update_attributes(project_params)
       render json: @project, status: :ok
     else
@@ -13,13 +14,8 @@ class ProjectsController < ApplicationController
   end
 
   def destroy
-    @project = Project.find_by_id(params[:id])
-    if @project
-      @project.destroy
-      render nothing: true, status: :no_content
-    else
-      render nothing: true, status: :bad_request
-    end
+    @project.destroy
+    render nothing: true, status: :no_content
   end
 
   def create
@@ -32,15 +28,15 @@ class ProjectsController < ApplicationController
   end
 
   def show
-    @project = Project.find_by(id: params[:id])
-    if @project
-      render json: @project, status: :ok
-    else
-      render nothing: true, status: :bad_request
-    end
+    render json: @project, status: :ok
   end
 
   private
+
+  def find_project
+    @project = Project.find_by_id(params[:id])
+    render nothing: true, status: :bad_request unless @project
+  end
 
   def project_params
     params.require(:project).permit(:id, :name)
