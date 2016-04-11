@@ -6,7 +6,6 @@ module API
     end
 
     def call
-      return UnauthorizedResponse unless authorized_user?
       story = Story.create(story_params)
       Response.new(story)
     rescue => e
@@ -16,11 +15,5 @@ module API
     protected
 
     attr_reader :story_params, :user
-
-    private
-
-    def authorized_user?
-      user.team.project
-    end
   end
 end

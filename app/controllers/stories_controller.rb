@@ -1,8 +1,8 @@
 class StoriesController < ApplicationController
-  before_action :set_story, only: [:show]
+  before_action :set_story, except: [:create]
   
   def create
-    response = StoryCreator.new(story_params, current_user)
+    response = API::StoryCreator.new(story_params, current_user).call
     render json: response.data, status: response.status
   end
 
@@ -15,6 +15,14 @@ class StoriesController < ApplicationController
     render nothing: true, status: :no_content
   rescue => e
     render json: "Error: #{e.message}", status: :internal_server_error
+  end
+
+  def update
+    if @story.update(story_params)
+      render json: @story, status: :ok
+    else
+      render json: @story, status: bad_request
+    end
   end
 
   private

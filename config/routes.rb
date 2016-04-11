@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   resources :projects, except: [:edit, :new]
 
+  resources :stories, except: [:edit, :new, :index]
+
   resources :users do
     collection do
       get 'from_token'
