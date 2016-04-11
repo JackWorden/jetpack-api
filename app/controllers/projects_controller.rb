@@ -1,59 +1,48 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:show, :update, :destroy]
-
-  # GET /projects
-  # GET /projects.json
   def index
-    @projects = Project.all
-
-    render json: @projects
+    render json: Project.all, status: :ok
   end
 
-  # GET /projects/1
-  # GET /projects/1.json
-  def show
-    render json: @project
-  end
-
-  # POST /projects
-  # POST /projects.json
-  def create
-    @project = Project.new(project_params)
-
-    if @project.save
-      render json: @project, status: :created, location: @project
+  def edit
+    @project = Project.find(project_params[:id])
+    if @project.update_attributes(project_params)
+      render json: @project, status: :ok
     else
-      render json: @project.errors, status: :unprocessable_entity
+      render json: @project, status: :bad_request
     end
   end
 
-  # PATCH/PUT /projects/1
-  # PATCH/PUT /projects/1.json
-  def update
-    @project = Project.find(params[:id])
-
-    if @project.update(project_params)
-      head :no_content
-    else
-      render json: @project.errors, status: :unprocessable_entity
-    end
-  end
-
-  # DELETE /projects/1
-  # DELETE /projects/1.json
   def destroy
-    @project.destroy
+    @project = Project.find_by_id(params[:id])
+    if @project
+      @project.destroy
+      render nothing: true, status: :no_content
+    else
+      render nothing: true, status: :bad_request
+    end
+  end
 
-    head :no_content
+  def new
+    @project = Project.new(project_params)
+    if @project.save
+      render json: @project, status: :ok
+    else
+      render json: @project, status: :bad_request
+    end
+  end
+
+  def show
+    @project = Project.find_by(id: params[:id])
+    if @project
+      render json: @project, status: :ok
+    else
+      render nothing: true, status: :bad_request
+    end
   end
 
   private
 
-    def set_project
-      @project = Project.find(params[:id])
-    end
-
-    def project_params
-      params[:project]
-    end
+  def project_params
+    params.require(:project).permit(:id, :name)
+  end
 end

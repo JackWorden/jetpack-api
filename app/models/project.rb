@@ -12,4 +12,6 @@ class Project < ActiveRecord::Base
   has_many :sprints
   has_many :stories
   has_many :issues
+
+  validates :name, presence: true
 end
