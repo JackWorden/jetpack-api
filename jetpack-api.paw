@@ -5,15 +5,7 @@
     <databaseInfo>
         <version>134481920</version>
         <UUID>D5F26DE6-2F2D-4F48-9ADD-36DCA775F607</UUID>
-<<<<<<< 360c90cd321a98433030607b2f0f8668e8e28acb
-<<<<<<< 353e83ba6c61290db77430c3555d5af41d09a690
-        <nextObjectID>162</nextObjectID>
-=======
-        <nextObjectID>135</nextObjectID>
->>>>>>> Adds routes and destroy action to StoriesController.
-=======
         <nextObjectID>182</nextObjectID>
->>>>>>> Updates paw file and stuff
         <metadata>
             <plist version="1.0">
                 <dict>
@@ -259,15 +251,7 @@
         <attribute name="order" type="int64">4</attribute>
         <attribute name="name" type="string">teams</attribute>
         <relationship name="parent" type="0/1" destination="LMREQUESTTREEITEM"></relationship>
-<<<<<<< 360c90cd321a98433030607b2f0f8668e8e28acb
-<<<<<<< 353e83ba6c61290db77430c3555d5af41d09a690
-        <relationship name="children" type="0/0" destination="LMREQUESTTREEITEM" idrefs="z127 z133 z130"></relationship>
-=======
-        <relationship name="children" type="0/0" destination="LMREQUESTTREEITEM" idrefs="z133 z130 z127"></relationship>
->>>>>>> Adds routes and destroy action to StoriesController.
-=======
         <relationship name="children" type="0/0" destination="LMREQUESTTREEITEM" idrefs="z130 z127 z133"></relationship>
->>>>>>> Updates paw file and stuff
         <relationship name="bodyparameters" type="0/0" destination="LMKEYVALUE"></relationship>
         <relationship name="headers" type="0/0" destination="LMKEYVALUE"></relationship>
         <relationship name="urlparameters" type="0/0" destination="LMKEYVALUE"></relationship>
@@ -377,7 +361,6 @@
         <relationship name="headers" type="0/0" destination="LMKEYVALUE"></relationship>
         <relationship name="urlparameters" type="0/0" destination="LMKEYVALUE"></relationship>
     </object>
-<<<<<<< 353e83ba6c61290db77430c3555d5af41d09a690
     <object type="LMREQUESTGROUP" id="z136">
         <attribute name="uuid" type="string">0F7F52E8-ED14-4234-8446-0961AD6230B5</attribute>
         <attribute name="order" type="int64">2</attribute>
@@ -565,10 +548,6 @@
         <relationship name="groupforurlparameters" type="0/1" destination="LMREQUESTGROUP"></relationship>
         <relationship name="request" type="0/1" destination="LMREQUEST" idrefs="z148"></relationship>
     </object>
-<<<<<<< 360c90cd321a98433030607b2f0f8668e8e28acb
-=======
->>>>>>> Adds routes and destroy action to StoriesController.
-=======
     <object type="LMREQUEST" id="z163">
         <attribute name="uuid" type="string">B9533BEB-49A6-4FF5-8A6F-84F3D8FF196E</attribute>
         <attribute name="url" type="string">[{"data":{"environmentVariable":"7C2707F8-60AD-4CC9-9080-D42AA70BFA7D"},"identifier":"com.luckymarmot.EnvironmentVariableDynamicValue"},"\\/stories\\/",{"data":{"request":"AA05EF9E-044F-4013-92EF-2EF9A02B24E5","keyPath":["id"],"format":0},"identifier":"com.luckymarmot.ResponseBodyPathDynamicValue"}]</attribute>
@@ -764,5 +743,4 @@
         <relationship name="groupforurlparameters" type="0/1" destination="LMREQUESTGROUP"></relationship>
         <relationship name="request" type="0/1" destination="LMREQUEST" idrefs="z181"></relationship>
     </object>
->>>>>>> Updates paw file and stuff
 </database>
