@@ -2,17 +2,17 @@ class TeamsController < ApplicationController
   before_action :set_team, except: [:create]
 
   def create
-    api_response = API::TeamCreator.new(team_params, current_user).call
-    render json: api_response.data, status: api_response.status
+    response = API::TeamCreator.new(team_params, current_user).call
+    render json: response.data, status: response.status
   end
 
   def show
-    return render json: { errors: 'User has no team' }, status: :bad_request unless @team
+    return no_team unless @team
     render json: @current_user.team
   end
 
   def destroy
-    return render json: { errors: 'User has no team' }, status: :bad_request unless @team
+    return no_team unless @team
 
     @team.destroy
     render text: 'Team successfully deleted'
@@ -28,5 +28,9 @@ class TeamsController < ApplicationController
 
   def team_params
     params[:team].permit(:name)
+  end
+
+  def no_team
+    render json: { errors: 'User has no team' }, status: :bad_request
   end
 end

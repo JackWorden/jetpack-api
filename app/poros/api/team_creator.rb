@@ -6,11 +6,11 @@ module API
     end
 
     def call
-      return ApiResponse.new({ errors: 'User already has a team' }, :bad_request) if user.team
+      return ErrorResponse.new('User already has a team', :bad_request) if user.team
       team = Team.create(team_params.merge(users: [user]))
-      ApiResponse.new(team)
+      Response.new(team)
     rescue => e
-      ApiResponse.new({ errors: "Encountered error: #{e.message}" }, :internal_server_error)
+      ErrorResponse.new("Encountered error: #{e.message}")
     end
 
     protected
