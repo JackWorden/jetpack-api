@@ -74,7 +74,7 @@ describe 'Project Requests', :no_auth, type: :api do
     end
   end
 
-  describe 'POST /projects/create' do
+  describe 'POST /projects' do
     context 'when the create is successful' do
       let(:params) do
         {
