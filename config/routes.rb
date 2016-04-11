@@ -8,4 +8,10 @@ Rails.application.routes.draw do
   end
 
   resource :teams, only: [:show, :create, :destroy]
+  resources :sprints, only: [:show, :create, :update, :destroy, :index] do
+    member do
+      post 'activate'
+      post 'deactivate'
+    end
+  end
 end
