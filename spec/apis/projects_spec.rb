@@ -42,7 +42,7 @@ describe 'Project Requests', :no_auth, type: :api do
     end
   end
 
-  describe 'POST /projects/:id/edit' do
+  describe 'PUT /projects/:id' do
     let(:project) { FactoryGirl.create(Project) }
 
     context 'when the update is valid' do
@@ -54,7 +54,7 @@ describe 'Project Requests', :no_auth, type: :api do
       end
 
       it 'should update the project and return the updated project' do
-        post edit_project_path(project), params
+        put project_path(project), params
         expect(response_body_json['name']).to eq 'Edited Project Name'
       end
     end
@@ -68,13 +68,13 @@ describe 'Project Requests', :no_auth, type: :api do
       end
 
       it 'should not update the project' do
-        post edit_project_path(project), params
+        put project_path(project), params
         expect(response_body_json['name']).to eq project.name
       end
     end
   end
 
-  describe 'POST /projects/new' do
+  describe 'POST /projects/create' do
     context 'when the create is successful' do
       let(:params) do
         {
@@ -84,7 +84,7 @@ describe 'Project Requests', :no_auth, type: :api do
       end
 
       it 'should create a new project and return it' do
-        post new_project_path, params
+        post projects_path, params
         # expect(response_body_json['id']).to be_present
         # expect(response_body_json['name']).to eq 'Test Project'
         # expect(response).to be_success
@@ -100,17 +100,17 @@ describe 'Project Requests', :no_auth, type: :api do
       end
 
       it 'should not create not create a new project' do
-        post new_project_path, params
+        post projects_path, params
         expect(response_body_json['id']).to be_blank
       end
 
       it 'should have a bad request status' do
-        post new_project_path, params
+        post projects_path, params
         expect(response).to be_bad_request
       end
 
       it "should send back the project's attributes" do
-        post new_project_path, params
+        post projects_path, params
         expect(response_body_json['name']).to eq ''
       end
     end

@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
   resources :projects
-  post "projects/:id/edit", to: "projects#edit"
-  post "projects/new", to: "projects#new"
 
   resources :users do
     collection do

@@ -3,7 +3,7 @@ class ProjectsController < ApplicationController
     render json: Project.all, status: :ok
   end
 
-  def edit
+  def update
     @project = Project.find(project_params[:id])
     if @project.update_attributes(project_params)
       render json: @project, status: :ok
@@ -22,7 +22,7 @@ class ProjectsController < ApplicationController
     end
   end
 
-  def new
+  def create
     @project = Project.new(project_params)
     if @project.save
       render json: @project, status: :ok
