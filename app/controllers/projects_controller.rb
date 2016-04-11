@@ -1,59 +1,51 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:show, :update, :destroy]
+  before_action :set_project, only: %i(show update destroy)
 
-  # GET /projects
-  # GET /projects.json
   def index
-    @projects = Project.all
-
-    render json: @projects
+    render json: Project.all, status: :ok
   end
 
-  # GET /projects/1
-  # GET /projects/1.json
-  def show
-    render json: @project
+  def update
+    if @project.update(project_params)
+      render json: @project, status: :ok
+    else
+      render json: @project, status: :bad_request
+    end
   end
 
-  # POST /projects
-  # POST /projects.json
+  def destroy
+    if @project
+      @project.destroy
+      render nothing: true, status: :no_content
+    else
+      render nothing: true, status: :bad_request
+    end
+  end
+
   def create
     @project = Project.new(project_params)
-
     if @project.save
-      render json: @project, status: :created, location: @project
+      render json: @project, status: :ok
     else
-      render json: @project.errors, status: :unprocessable_entity
+      render json: @project, status: :bad_request
     end
   end
 
-  # PATCH/PUT /projects/1
-  # PATCH/PUT /projects/1.json
-  def update
-    @project = Project.find(params[:id])
-
-    if @project.update(project_params)
-      head :no_content
+  def show
+    if @project
+      render json: @project, status: :ok
     else
-      render json: @project.errors, status: :unprocessable_entity
+      render nothing: true, status: :bad_request
     end
-  end
-
-  # DELETE /projects/1
-  # DELETE /projects/1.json
-  def destroy
-    @project.destroy
-
-    head :no_content
   end
 
   private
 
-    def set_project
-      @project = Project.find(params[:id])
-    end
+  def set_project
+    @project = Project.find_by_id(params[:id])
+  end
 
-    def project_params
-      params[:project]
-    end
+  def project_params
+    params.require(:project).permit(:id, :name)
+  end
 end
