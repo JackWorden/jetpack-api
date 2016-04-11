@@ -1,5 +1,5 @@
 module API
-  class ApiResponse
+  class Response
     attr_reader :data, :status
 
     def initialize(data, status = :ok)
