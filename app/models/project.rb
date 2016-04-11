@@ -10,6 +10,7 @@
 
 class Project < ActiveRecord::Base
   has_many :sprints
+  belongs_to :active_sprint, class_name: 'Sprint'
   has_many :stories
   has_many :issues
 
