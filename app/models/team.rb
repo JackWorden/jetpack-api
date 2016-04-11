@@ -14,6 +14,8 @@ class Team < ActiveRecord::Base
 
   delegate :schema_name, :switch, :create_schema, :drop_schema, to: :schema_manager
 
+  has_many :users
+
   def self.current
     Apartment::Tenant.current
   end
