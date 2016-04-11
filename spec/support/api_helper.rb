@@ -14,7 +14,11 @@ module ApiHelper
   end
 
   def response_body_json
-    JSON.parse(response.body)
+    JSON.parse(response.body)['data']
+  end
+
+  def response_attributes_json
+    response_body_json['attributes']
   end
 end
 

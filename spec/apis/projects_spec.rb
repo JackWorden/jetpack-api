@@ -29,7 +29,7 @@ describe 'Project Requests', :no_auth, type: :api do
 
       it 'should return the project' do
         get project_path(project)
-        expect(response_body_json['id']).to eq project.id
+        expect(response_body_json['id']).to eq project.id.to_s
       end
     end
 
@@ -55,7 +55,7 @@ describe 'Project Requests', :no_auth, type: :api do
 
       it 'should update the project and return the updated project' do
         put project_path(project), params
-        expect(response_body_json['name']).to eq 'Edited Project Name'
+        expect(response_body_json['attributes']['name']).to eq 'Edited Project Name'
       end
     end
 
@@ -69,7 +69,7 @@ describe 'Project Requests', :no_auth, type: :api do
 
       it 'should not update the project' do
         put project_path(project), params
-        expect(response_body_json['name']).to eq project.name
+        expect(response_attributes_json['name']).to eq project.name
       end
     end
   end
@@ -86,7 +86,7 @@ describe 'Project Requests', :no_auth, type: :api do
       it 'should create a new project and return it' do
         post projects_path, params
         expect(response_body_json['id']).to be_present
-        expect(response_body_json['name']).to eq 'Test Project'
+        expect(response_attributes_json['name']).to eq 'Test Project'
       end
     end
 
@@ -106,11 +106,6 @@ describe 'Project Requests', :no_auth, type: :api do
       it 'should have a bad request status' do
         post projects_path, params
         expect(response).to be_bad_request
-      end
-
-      it "should send back the project's attributes" do
-        post projects_path, params
-        expect(response_body_json['name']).to eq ''
       end
     end
   end
