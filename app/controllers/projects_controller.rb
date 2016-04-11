@@ -6,7 +6,7 @@ class ProjectsController < ApplicationController
   end
 
   def update
-    if @project.update_attributes(project_params)
+    if @project.update(project_params)
       render json: @project, status: :ok
     else
       render json: @project, status: :bad_request
