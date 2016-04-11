@@ -15,7 +15,7 @@ class TeamsController < ApplicationController
     return no_team unless @team
 
     @team.destroy
-    render text: 'Team successfully deleted'
+    render nothing: true, status: :no_content
   rescue => e
     render json: { errors: "Deletion failed: #{e.message}" }, status: :internal_server_error
   end
