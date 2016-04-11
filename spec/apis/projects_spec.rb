@@ -85,9 +85,8 @@ describe 'Project Requests', :no_auth, type: :api do
 
       it 'should create a new project and return it' do
         post projects_path, params
-        # expect(response_body_json['id']).to be_present
-        # expect(response_body_json['name']).to eq 'Test Project'
-        # expect(response).to be_success
+        expect(response_body_json['id']).to be_present
+        expect(response_body_json['name']).to eq 'Test Project'
       end
     end
 
