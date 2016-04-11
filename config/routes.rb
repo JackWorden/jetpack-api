@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   end
 
   resource :teams, only: [:show, :create, :destroy]
-  resources :sprints, only: [:show, :create, :update, :destroy, :index] do
+  resources :sprints, except: [:edit, :new] do
     member do
       post 'activate'
       post 'deactivate'

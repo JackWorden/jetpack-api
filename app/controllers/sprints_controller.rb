@@ -1,5 +1,5 @@
 class SprintsController < ApplicationController
-  before_action :set_sprint, only: [:show, :update, :destroy, :activate, :deactivate]
+  before_action :set_sprint, except: [:index, :create]
 
   def index
     render json: Sprint.all
