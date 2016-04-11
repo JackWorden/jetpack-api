@@ -1,13 +1,7 @@
 require 'rails_helper'
 
-describe 'Project Requests', type: :api do
+describe 'Project Requests', :no_auth, type: :api do
   let(:user) { FactoryGirl.create(User) }
-
-  before do
-    allow_any_instance_of(ApplicationController).to(
-      receive(:authenticate).and_return(user)
-    )
-  end
 
   describe 'GET /projects/' do
     context 'when there are no projects' do
