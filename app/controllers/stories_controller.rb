@@ -1,6 +1,6 @@
 class StoriesController < ApplicationController
   before_action :set_story, except: [:create]
-  
+
   def create
     response = API::StoryCreator.new(story_params, current_user).call
     render json: response.data, status: response.status
@@ -21,7 +21,7 @@ class StoriesController < ApplicationController
     if @story.update(story_params)
       render json: @story, status: :ok
     else
-      render json: @story, status: bad_request
+      render json: @story, status: :bad_request
     end
   end
 

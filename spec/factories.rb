@@ -15,4 +15,9 @@ FactoryGirl.define do
   factory :sprint do
     project
   end
+
+  factory :story do
+    sequence(:title) { |i| "Story ##{i}" }
+    project
+  end
 end
