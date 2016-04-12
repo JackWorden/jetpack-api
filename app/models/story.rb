@@ -2,10 +2,11 @@
 #
 # Table name: stories
 #
-#  id         :integer          not null, primary key
-#  project_id :integer          not null
-#  sprint_id  :integer
-#  title      :string           not null
+#  id          :integer          not null, primary key
+#  project_id  :integer          not null
+#  sprint_id   :integer
+#  title       :string           not null
+#  description :text
 #
 
 class Story < ActiveRecord::Base

@@ -2,10 +2,12 @@
 #
 # Table name: projects
 #
-#  id         :integer          not null, primary key
-#  name       :string           not null
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id               :integer          not null, primary key
+#  name             :string           not null
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  team_id          :integer
+#  active_sprint_id :integer
 #
 
 class Project < ActiveRecord::Base
