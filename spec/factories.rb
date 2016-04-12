@@ -20,4 +20,9 @@ FactoryGirl.define do
     sequence(:title) { |i| "Story ##{i}" }
     project
   end
+
+  factory :issue do
+    sequence(:description) { |i| "Issue ##{i}" }
+    project
+  end
 end

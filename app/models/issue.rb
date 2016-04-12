@@ -15,4 +15,6 @@ class Issue < ActiveRecord::Base
   belongs_to :sprint
   belongs_to :story
   belongs_to :assignee, class_name: 'User'
+
+  validates :description, presence: true
 end
