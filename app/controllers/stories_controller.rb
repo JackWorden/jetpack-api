@@ -7,14 +7,20 @@ class StoriesController < ApplicationController
   end
 
   def show
-    render json: @story
+    if @story
+      render json: @story
+    else
+      render nothing: true, status: :bad_request
+    end
   end
 
   def destroy
-    @story.destroy
-    render nothing: true, status: :no_content
-  rescue => e
-    render json: "Error: #{e.message}", status: :internal_server_error
+    if @story
+      @story.destroy
+      render nothing: true, status: :no_content
+    else
+      render nothing: true, status: :bad_request
+    end
   end
 
   def update
@@ -32,6 +38,6 @@ class StoriesController < ApplicationController
   end
 
   def set_story
-    @story = Story.find(params[:id])
+    @story = Story.find_by_id(params[:id])
   end
 end
