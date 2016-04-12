@@ -40,7 +40,7 @@ describe 'Project Requests', :no_auth, type: :api do
     end
   end
 
-  describe 'PUT /projects/:id' do
+  describe 'PATCH /projects/:id' do
     let(:project) { FactoryGirl.create(Project) }
 
     context 'when the update is valid' do
@@ -52,7 +52,7 @@ describe 'Project Requests', :no_auth, type: :api do
       end
 
       it 'should update the project and return the updated project' do
-        put project_path(project), params
+        patch project_path(project), params
         expect(response_body_json['attributes']['name']).to eq 'Edited Project Name'
       end
     end
@@ -67,7 +67,7 @@ describe 'Project Requests', :no_auth, type: :api do
         end
 
         it 'should not update the project' do
-          put project_path(project), params
+          patch project_path(project), params
           expect(response_attributes_json['name']).to eq project.name
         end
       end
@@ -81,7 +81,7 @@ describe 'Project Requests', :no_auth, type: :api do
         end
 
         it 'should not update the project and return a bad_request' do
-          put project_path(project), params
+          patch project_path(project), params
           expect(response_attributes_json['name']).to eq project.name
           expect(response).to be_bad_request
         end

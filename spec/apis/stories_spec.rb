@@ -64,7 +64,7 @@ describe 'Stories Requests', :no_auth, type: :api do
     end
   end
 
-  describe 'PUT /stories/:id' do
+  describe 'PATCH /stories/:id' do
     let(:story) { FactoryGirl.create(Story) }
 
     context 'when the update is successful' do
@@ -76,7 +76,7 @@ describe 'Stories Requests', :no_auth, type: :api do
       end
 
       it 'should update the story and return it' do
-        put story_path(story), params
+        patch story_path(story), params
         expect(response_body_json['attributes']['title']).to eq 'Another Title'
       end
     end
@@ -90,7 +90,7 @@ describe 'Stories Requests', :no_auth, type: :api do
       end
 
       it 'should have a bad request status' do
-        put story_path(story), params
+        patch story_path(story), params
         expect(response).to be_bad_request
       end
     end
