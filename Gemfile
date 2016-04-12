@@ -14,11 +14,11 @@ group :production do
 end
 
 group :development do
-  gem 'rubocop'
   gem 'spring'
 end
 
 group :development, :test do
+  gem 'rubocop'
   gem 'dotenv-rails'
   gem 'pry-rails'
   gem 'pry'
