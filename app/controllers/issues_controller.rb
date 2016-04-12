@@ -1,5 +1,5 @@
 class IssuesController < ApplicationController
-  before_action :set_issue, except: [:create]
+  before_action :set_issue, except: [:create, :index]
 
   def index
     render json: Issue.all
@@ -34,7 +34,7 @@ class IssuesController < ApplicationController
   private
 
   def issue_params
-    params.require(:issue).permit(:id, :name)
+    params.require(:issue).permit(:id, :description, :project_id, :sprint_id, :story_id)
   end
 
   def set_issue
