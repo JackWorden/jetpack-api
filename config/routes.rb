@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   resources :projects, except: [:edit, :new]
 
+  resources :stories, except: [:edit, :new, :index]
+
   resources :users do
     collection do
       get 'from_token'
@@ -8,6 +10,7 @@ Rails.application.routes.draw do
   end
 
   resource :teams, only: [:show, :create, :destroy]
+
   resources :sprints, except: [:edit, :new] do
     member do
       post 'activate'
