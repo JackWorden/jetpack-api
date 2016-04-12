@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 describe 'Sprints Requests', :no_auth, type: :api do
-  let(:user) { FactoryGirl.create(User) }
   let(:project) { FactoryGirl.create(:project) }
 
   describe 'GET /sprints' do
