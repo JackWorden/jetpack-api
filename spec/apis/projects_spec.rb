@@ -57,17 +57,34 @@ describe 'Project Requests', :no_auth, type: :api do
       end
     end
 
-    context 'when an invalid attribute is updated' do
-      let(:params) do
-        {
-          format: :json,
-          project: { id: project.id, invalid_attribute: 'Invalid' }
-        }
+    context 'when the update is invalid' do
+      context 'when an invalid attribute is updated' do
+        let(:params) do
+          {
+            format: :json,
+            project: { id: project.id, invalid_attribute: 'Invalid' }
+          }
+        end
+
+        it 'should not update the project' do
+          put project_path(project), params
+          expect(response_attributes_json['name']).to eq project.name
+        end
       end
 
-      it 'should not update the project' do
-        put project_path(project), params
-        expect(response_attributes_json['name']).to eq project.name
+      context 'when a valid attribute is set to an invalid value' do
+        let(:params) do
+          {
+            format: :json,
+            project: { id: project.id, name: '' }
+          }
+        end
+
+        it 'should not update the project and return a bad_request' do
+          put project_path(project), params
+          expect(response_attributes_json['name']).to eq project.name
+          expect(response).to be_bad_request
+        end
       end
     end
   end

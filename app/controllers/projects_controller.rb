@@ -9,7 +9,7 @@ class ProjectsController < ApplicationController
     if @project.update(project_params)
       render json: @project, status: :ok
     else
-      render json: @project, status: :bad_request
+      render json: @project.reload, status: :bad_request
     end
   end
 
