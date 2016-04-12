@@ -1,3 +1,3 @@
 class StorySerializer < ActiveModel::Serializer
-  attributes :id, :title
+  attributes :id, :title, :description
 end
