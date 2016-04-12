@@ -1,8 +1,6 @@
 require 'rails_helper'
 
 describe 'Project Requests', :no_auth, type: :api do
-  let(:user) { FactoryGirl.create(User) }
-
   describe 'GET /projects/' do
     context 'when there are no projects' do
       it 'should return an empty array' do

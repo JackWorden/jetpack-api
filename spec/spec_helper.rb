@@ -8,8 +8,6 @@ RSpec.configure do |config|
   end
 
   config.before(:each, :no_auth) do
-    allow_any_instance_of(ApplicationController).to(
-      receive(:authenticate).and_return(user)
-    )
+    allow_any_instance_of(ApplicationController).to(receive(:authenticate))
   end
 end
