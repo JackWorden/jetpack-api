@@ -17,4 +17,6 @@ Rails.application.routes.draw do
       post 'deactivate'
     end
   end
+
+  resources :issues, except: [:edit, :new]
 end

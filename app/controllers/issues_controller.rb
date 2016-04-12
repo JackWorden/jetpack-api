@@ -1,4 +1,4 @@
-class IssueController < ApplicationController
+class IssuesController < ApplicationController
   before_action :set_issue, except: [:create]
 
   def index
