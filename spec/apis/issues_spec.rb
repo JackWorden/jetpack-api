@@ -68,7 +68,7 @@ RSpec.describe 'Issue Requests', :no_auth, type: :api do
 
     context 'when the issue does not exist' do
       it 'should return an empty string' do
-        expect{ get '/issues/-1' }.to raise_error ActiveRecord::RecordNotFound
+        expect { get '/issues/-1' }.to raise_error ActiveRecord::RecordNotFound
       end
     end
   end
