@@ -51,7 +51,7 @@ RSpec.describe 'Issue Requests', :no_auth, type: :api do
 
       it 'should return a bad request status' do
         post '/issues', issue_params
-        expect(response.status).to eq 400
+        expect(response).to be_bad_request
       end
     end
   end
