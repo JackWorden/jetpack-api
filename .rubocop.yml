@@ -3,6 +3,7 @@ AllCops:
     - config/**/*
     - db/**/*
     - bin/*
+    - vendor/**/*
 
 MethodLength:
   Max: 10
