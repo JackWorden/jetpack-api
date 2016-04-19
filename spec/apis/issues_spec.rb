@@ -99,14 +99,19 @@ RSpec.describe 'Issue Requests', :no_auth, type: :api do
   end
 
   describe 'PATCH /issues/:id/assignee' do
-    let(:user) { FactoryGirl.create(User) }
+    let(:user) { FactoryGirl.create(User, team: team) }
+    let(:team) { FactoryGirl.create(Team) }
     let(:issue) { FactoryGirl.create(Issue) }
+
+    before do
+      allow_any_instance_of(IssuesController).to receive(:current_user) { user }
+    end
 
     context 'when assigning an issue to a user' do
       let(:params) do
         {
           format: :json,
-          user_id: user.id,
+          user_id: user.id
         }
       end
 
@@ -130,10 +135,10 @@ RSpec.describe 'Issue Requests', :no_auth, type: :api do
       end
     end
 
-    context 'when unassigning an issue to a user' do
+    context 'when unassigning an issue from a user' do
       let(:params) { { format: :json } }
 
-      it 'should unassign the issue to the user' do
+      it 'should unassign the issue from the user' do
         patch assignee_issue_path(issue), params
       end
     end

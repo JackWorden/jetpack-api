@@ -33,14 +33,21 @@ class IssuesController < ApplicationController
   end
 
   def assignee
-    if @issue.update(assignee_id: params[:user_id])
-      render json: @issue.reload, status: :ok
+    if params[:user_id].present?
+      API::IssueAssigner.assign!(current_user.team, @issue, user)
     else
-      render json: @issue.reload, status: :bad_request
+      API::IssueAssigner.unassign!(@issue)
     end
+    render json: @issue.reload, status: :ok
+  rescue => e
+    render json: { errors: e.message }, status: :bad_request
   end
 
   private
+
+  def user
+    User.find(params[:user_id])
+  end
 
   def issue_parent
     project || sprint || story
