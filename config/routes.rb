@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   resources :users do
     collection do
-      get 'from_token'
+      post 'from_token'
     end
   end
 
