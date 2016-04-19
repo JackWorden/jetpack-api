@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:show, :update, :destroy]
+  before_action :set_project, except: [:index, :create]
 
   def index
     render json: Project.all, status: :ok
@@ -34,6 +34,14 @@ class ProjectsController < ApplicationController
   def show
     if @project
       render json: @project, status: :ok
+    else
+      render nothing: true, status: :bad_request
+    end
+  end
+
+  def sprints
+    if @project
+      render json: @project.sprints, status: :ok
     else
       render nothing: true, status: :bad_request
     end
