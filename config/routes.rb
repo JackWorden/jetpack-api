@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  resources :projects, except: [:edit, :new]
+  resources :projects, except: [:edit, :new] do
+    member do
+      get 'sprints'
+    end
+  end
 
   resources :stories, except: [:edit, :new, :index]
 

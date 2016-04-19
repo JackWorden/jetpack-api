@@ -142,4 +142,24 @@ describe 'Project Requests', :no_auth, type: :api do
       end
     end
   end
+
+  describe 'GET /projects/:id/sprints' do
+    context 'when the project exists' do
+      let(:project) { FactoryGirl.create(Project) }
+      let!(:sprint) { FactoryGirl.create(Sprint, project: project) }
+      let!(:sprint2) { FactoryGirl.create(Sprint, project: project) }
+
+      it "should return the project's sprints" do
+        get "/projects/#{project.id}/sprints"
+        expect(response_body_json.size).to eq 2
+      end
+    end
+
+    context 'when the project does not exist' do
+      it 'should return a bad request' do
+        get '/projects/-1'
+        expect(response).to be_bad_request
+      end
+    end
+  end
 end
