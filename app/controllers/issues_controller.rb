@@ -32,6 +32,16 @@ class IssuesController < ApplicationController
     end
   end
 
+  def assignee
+    if params[:user_id].present?
+      @issue.update(assignee_id: params[:user_id])
+    else
+      @issue.update(assignee_id: nil)
+    end
+
+    render json: @issue.reload, status: :ok
+  end
+
   private
 
   def issue_parent

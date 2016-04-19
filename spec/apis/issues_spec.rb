@@ -97,4 +97,31 @@ RSpec.describe 'Issue Requests', :no_auth, type: :api do
       end
     end
   end
+
+  describe 'PATCH /issues/:id/assignee' do
+    let(:user) { FactoryGirl.create(User) }
+    let(:issue) { FactoryGirl.create(Issue) }
+
+    context 'when assigning an issue to a user' do
+      let(:params) do
+        {
+          format: :json,
+          user_id: user.id,
+        }
+      end
+
+      it 'should assign the issue to the user' do
+        patch assignee_issue_path(issue), params
+        expect(issue.reload.assignee).to eq user
+      end
+    end
+
+    context 'when unassigning an issue to a user' do
+      let(:params) { { format: :json } }
+
+      it 'should unassign the issue to the user' do
+        patch assignee_issue_path(issue), params
+      end
+    end
+  end
 end
