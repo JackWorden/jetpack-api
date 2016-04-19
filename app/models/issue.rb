@@ -17,4 +17,11 @@ class Issue < ActiveRecord::Base
   belongs_to :assignee, class_name: 'User'
 
   validates :description, presence: true
+  validates :assignee, presence: true, if: :has_assignee?
+
+  private
+
+  def has_assignee?
+    assignee_id.present?
+  end
 end

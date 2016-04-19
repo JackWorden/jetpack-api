@@ -33,13 +33,11 @@ class IssuesController < ApplicationController
   end
 
   def assignee
-    if params[:user_id].present?
-      @issue.update(assignee_id: params[:user_id])
+    if @issue.update(assignee_id: params[:user_id])
+      render json: @issue.reload, status: :ok
     else
-      @issue.update(assignee_id: nil)
+      render json: @issue.reload, status: :bad_request
     end
-
-    render json: @issue.reload, status: :ok
   end
 
   private

@@ -114,6 +114,20 @@ RSpec.describe 'Issue Requests', :no_auth, type: :api do
         patch assignee_issue_path(issue), params
         expect(issue.reload.assignee).to eq user
       end
+
+      context 'when the user does not exist' do
+        let(:params) do
+          {
+            format: :json,
+            user_id: -1
+          }
+        end
+
+        it 'should have a bad request status' do
+          patch assignee_issue_path(issue), params
+          expect(response).to be_bad_request
+        end
+      end
     end
 
     context 'when unassigning an issue to a user' do
