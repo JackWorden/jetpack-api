@@ -1,11 +1,25 @@
 Rails.application.routes.draw do
-  resources :projects, except: [:edit, :new] do
-    member do
-      get 'sprints'
-    end
+  resources :projects, only: [:index, :show, :create, :update, :destroy] do
+    resources :sprints, only: [:index, :create]
+    resources :stories, only: [:index, :create]
+    resources :issues,  only: [:index, :create]
   end
 
-  resources :stories, except: [:edit, :new, :index]
+  resources :sprints, only: [:show, :update, :destroy] do
+    member do
+      post 'activate'
+      post 'deactivate'
+    end
+
+    resources :stories, only: [:index, :create]
+    resources :issues,  only: [:index, :create]
+  end
+
+  resources :stories, only: [:show, :update, :destroy] do
+    resources :issues,  only: [:index, :create]
+  end
+
+  resources :issues,  only: [:show, :update, :destroy]
 
   resources :users do
     collection do
@@ -14,13 +28,4 @@ Rails.application.routes.draw do
   end
 
   resource :teams, only: [:show, :create, :destroy]
-
-  resources :sprints, except: [:edit, :new] do
-    member do
-      post 'activate'
-      post 'deactivate'
-    end
-  end
-
-  resources :issues, except: [:edit, :new]
 end

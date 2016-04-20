@@ -1,9 +1,18 @@
 class StoriesController < ApplicationController
   before_action :set_story, except: [:create]
 
+  def index
+    render json: story_parent.stories
+  end
+
   def create
-    response = API::StoryCreator.new(story_params, current_user).call
-    render json: response.data, status: response.status
+    story = story_parent.stories.new(story_params)
+
+    if story.save
+      render json: story, status: :created
+    else
+      render json: story, status: :bad_request
+    end
   end
 
   def show
@@ -32,6 +41,18 @@ class StoriesController < ApplicationController
   end
 
   private
+
+  def story_parent
+    project || sprint
+  end
+
+  def project
+    Project.find(params[:project_id]) if params[:project_id]
+  end
+
+  def sprint
+    Sprint.find(params[:sprint_id]) if params[:sprint_id]
+  end
 
   def story_params
     params.require(:story).permit([:title, :description, :project_id, :sprint_id])

@@ -5,18 +5,9 @@ class ProjectsController < ApplicationController
     render json: Project.all, status: :ok
   end
 
-  def update
-    if @project.update(project_params)
-      render json: @project, status: :ok
-    else
-      render json: @project.reload, status: :bad_request
-    end
-  end
-
-  def destroy
+  def show
     if @project
-      @project.destroy
-      render nothing: true, status: :no_content
+      render json: @project, status: :ok
     else
       render nothing: true, status: :bad_request
     end
@@ -31,17 +22,18 @@ class ProjectsController < ApplicationController
     end
   end
 
-  def show
-    if @project
+  def update
+    if @project.update(project_params)
       render json: @project, status: :ok
     else
-      render nothing: true, status: :bad_request
+      render json: @project.reload, status: :bad_request
     end
   end
 
-  def sprints
+  def destroy
     if @project
-      render json: @project.sprints, status: :ok
+      @project.destroy
+      render nothing: true, status: :no_content
     else
       render nothing: true, status: :bad_request
     end

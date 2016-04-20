@@ -2,7 +2,7 @@ class IssuesController < ApplicationController
   before_action :set_issue, except: [:create, :index]
 
   def index
-    render json: Issue.all
+    render json: issue_parent.issues
   end
 
   def show
@@ -23,7 +23,8 @@ class IssuesController < ApplicationController
   end
 
   def create
-    @issue = Issue.new(issue_params)
+    @issue = issue_parent.issues.new(issue_params)
+
     if @issue.save
       render json: @issue, status: :ok
     else
@@ -32,6 +33,22 @@ class IssuesController < ApplicationController
   end
 
   private
+
+  def issue_parent
+    project || sprint || story
+  end
+
+  def project
+    Project.find(params[:project_id]) if params[:project_id]
+  end
+
+  def sprint
+    Sprint.find(params[:sprint_id]) if params[:sprint_id]
+  end
+
+  def story
+    Story.find(params[:story_id]) if params[:story_id]
+  end
 
   def issue_params
     params.require(:issue).permit(:id, :description, :project_id, :sprint_id, :story_id)

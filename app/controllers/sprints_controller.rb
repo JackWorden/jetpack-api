@@ -2,15 +2,16 @@ class SprintsController < ApplicationController
   before_action :set_sprint, except: [:index, :create]
 
   def index
-    render json: Sprint.all
+    render json: Project.find(params[:project_id]).sprints
   end
 
   def create
-    @sprint = Sprint.new(sprint_params)
-    if @sprint.save
-      render json: @sprint, status: :ok
+    sprint = Project.find(params[:project_id]).sprints.new(sprint_params)
+
+    if sprint.save
+      render json: sprint, status: :ok
     else
-      render json: @sprint, status: :bad_request
+      render json: sprint, status: :bad_request
     end
   end
 

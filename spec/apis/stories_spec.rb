@@ -3,45 +3,24 @@ require 'rails_helper'
 describe 'Stories Requests', :no_auth, type: :api do
   let(:project) { FactoryGirl.create(Project) }
 
-  describe 'POST /stories' do
-    let(:params) do
-      {
-        format: :json,
-        story: { title: 'Test Story', project_id: project.id }
-      }
-    end
-
+  describe 'POST /project/:project_id/stories' do
     context 'when the creation is successful' do
-      let(:params) do
-        {
-          format: :json,
-          story: { title: 'Test Story', project_id: project.id }
-        }
-      end
+      let(:story_params) { FactoryGirl.attributes_for(Story, project: project) }
 
       it 'should create the story and return it' do
-        post stories_path, params
+        post project_stories_path(project), story: story_params
+
         expect(response_body_json['id']).to be_present
-        expect(response_body_json['attributes']['title']).to eq 'Test Story'
+        expect(response_body_json['attributes']['title']).to eq story_params[:title]
       end
     end
 
     context 'when the creation is unsuccessful' do
-      let(:params) do
-        {
-          format: :json,
-          story: { title: '', project_id: project.id }
-        }
-      end
+      let(:story_params) { FactoryGirl.attributes_for(Story, project: project, title: '') }
 
       it 'should not create the story' do
-        post stories_path, params
+        post project_stories_path(project), story: story_params
         expect(response_body_json['id']).to be_blank
-      end
-
-      it "should return the story's attributes" do
-        post stories_path, params
-        expect(response_body_json['attributes']['title']).to eq ''
       end
     end
   end
@@ -59,7 +38,7 @@ describe 'Stories Requests', :no_auth, type: :api do
     context 'when the story does not exist' do
       it 'should have a bad request status' do
         get story_path(-1)
-        # expect(response).to be_bad_request
+        expect(response).to be_bad_request
       end
     end
   end
