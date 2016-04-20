@@ -4,52 +4,38 @@ describe 'Sprints Requests', :no_auth, type: :api do
   let(:project) { FactoryGirl.create(:project) }
 
   describe 'GET /sprints' do
-    context 'when sprints exist' do
-      before do
-        FactoryGirl.create_list(Sprint, 5)
-      end
-
-      it 'should return all sprints' do
-        get sprints_path
-        expect(response_body_json.count).to eq Sprint.all.count
+    context 'when there are no sprints' do
+      it 'should return an empty array' do
+        get project_sprints_path(project)
+        expect(response_body_json).to eq []
       end
     end
 
-    context 'when there are no sprints' do
-      it 'should return an empty array' do
-        get sprints_path
-        expect(response_body_json).to eq []
+    context 'when sprints exist' do
+      before do
+        FactoryGirl.create_list(Sprint, 5, project: project)
+      end
+
+      it 'should return all sprints' do
+        get project_sprints_path(project)
+        expect(response_body_json.count).to eq Sprint.all.count
       end
     end
   end
 
   describe 'POST /sprints' do
     context 'when the create is successful' do
-      let(:params) do
-        {
-          format: :json,
-          sprint: { end_date: '', project_id: project.id }
-        }
-      end
+      let(:sprint_params) { FactoryGirl.attributes_for(Sprint) }
 
       it 'should create a new sprint and return it' do
-        post sprints_path, params
+        post project_sprints_path(project), sprint: sprint_params
         expect(response_body_json['id']).to be_present
+        expect(response_attributes_json['name']).to eq sprint_params[:name]
       end
     end
 
     context 'when the create is unsuccessful' do
-      let(:params) do
-        {
-          format: :json,
-          sprint: { project_id: -1 }
-        }
-      end
-
-      it 'should have a bad request status' do
-        post sprints_path, params
-        expect(response).to be_bad_request
-      end
+      pending 'model has no validations'
     end
   end
 
@@ -76,35 +62,16 @@ describe 'Sprints Requests', :no_auth, type: :api do
     let(:new_project) { FactoryGirl.create(Project) }
 
     context 'when the update is successful' do
-      let(:params) do
-        {
-          format: :json,
-          sprint: { project_id: new_project.id }
-        }
-      end
+      let(:sprint_params) { FactoryGirl.attributes_for(Sprint, end_date: sprint.end_date + 1.day) }
 
       it 'should update the sprint and return it' do
-        put sprint_path(sprint), params
-        expect(response_attributes_json['project-id']).to eq new_project.id
+        put sprint_path(sprint), sprint: sprint_params
+        expect(response_attributes_json['end-date']).to eq sprint_params[:end_date].as_json
       end
     end
 
     context 'when the update is not successful' do
-      let(:params) do
-        {
-          format: :json,
-          sprint: { id: -1 }
-        }
-      end
-
-      before do
-        allow(sprint).to receive(:update) { false }
-      end
-
-      it 'should not update the sprint' do
-        put sprint_path(sprint), params
-        expect(response_body_json['end_date']).to be_blank
-      end
+      pending 'model has no validations'
     end
   end
 
