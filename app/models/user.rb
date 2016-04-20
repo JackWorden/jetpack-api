@@ -2,13 +2,15 @@
 #
 # Table name: public.users
 #
-#  id         :integer          not null, primary key
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  team_id    :integer
-#  name       :string           not null
-#  github_id  :integer          not null
-#  token      :string
+#  id                   :integer          not null, primary key
+#  created_at           :datetime         not null
+#  updated_at           :datetime         not null
+#  team_id              :integer
+#  name                 :string           not null
+#  github_id            :integer          not null
+#  token                :string
+#  github_access_token  :string
+#  profile_picture_link :text
 #
 
 class User < ActiveRecord::Base

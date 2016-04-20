@@ -6,10 +6,14 @@ module API
 
     def user
       return nil unless github_user
+      find_or_create_user
+    end
 
+    def find_or_create_user
       User.where(github_id: github_user.id).first_or_create.tap do |user|
         user.github_access_token = access_token
         user.name = github_user.name.presence || github_user.login.presence
+        user.profile_picture_url = github_user.avatar_url
       end
     end
 
