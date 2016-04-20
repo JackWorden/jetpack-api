@@ -7,7 +7,8 @@ class ProjectsController < ApplicationController
 
   def show
     if @project
-      render json: @project, status: :ok
+      render json: @project,
+             include: %w(sprints sprints.stories sprints.issues sprints.stories.issues)
     else
       render nothing: true, status: :bad_request
     end
