@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 20160420233443) do
     t.integer "project_id",  null: false
     t.integer "sprint_id"
     t.integer "story_id"
-    t.integer "user_id"
+    t.integer "assignee_id"
     t.text    "description"
   end
 
@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(version: 20160420233443) do
     t.integer  "github_id",           null: false
     t.string   "token"
     t.string   "github_access_token"
+    t.string   "profile_picture_url"
   end
 
   add_index "users", ["github_access_token"], name: "index_users_on_github_access_token", unique: true, using: :btree

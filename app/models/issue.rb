@@ -6,7 +6,7 @@
 #  project_id  :integer          not null
 #  sprint_id   :integer
 #  story_id    :integer
-#  user_id     :integer
+#  assignee_id :integer
 #  description :text
 #
 
@@ -17,4 +17,11 @@ class Issue < ActiveRecord::Base
   belongs_to :assignee, class_name: 'User'
 
   validates :description, presence: true
+  validates :assignee, presence: true, if: :assigned?
+
+  private
+
+  def assigned?
+    assignee_id.present?
+  end
 end

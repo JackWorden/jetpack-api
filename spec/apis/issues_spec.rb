@@ -97,4 +97,50 @@ RSpec.describe 'Issue Requests', :no_auth, type: :api do
       end
     end
   end
+
+  describe 'PATCH /issues/:id/assignee' do
+    let(:user) { FactoryGirl.create(User, team: team) }
+    let(:team) { FactoryGirl.create(Team) }
+    let(:issue) { FactoryGirl.create(Issue) }
+
+    before do
+      allow_any_instance_of(IssuesController).to receive(:current_user) { user }
+    end
+
+    context 'when assigning an issue to a user' do
+      let(:params) do
+        {
+          format: :json,
+          user_id: user.id
+        }
+      end
+
+      it 'should assign the issue to the user' do
+        patch assignee_issue_path(issue), params
+        expect(issue.reload.assignee).to eq user
+      end
+
+      context 'when the user does not exist' do
+        let(:params) do
+          {
+            format: :json,
+            user_id: -1
+          }
+        end
+
+        it 'should have a bad request status' do
+          patch assignee_issue_path(issue), params
+          expect(response).to be_bad_request
+        end
+      end
+    end
+
+    context 'when unassigning an issue from a user' do
+      let(:params) { { format: :json } }
+
+      it 'should unassign the issue from the user' do
+        patch assignee_issue_path(issue), params
+      end
+    end
+  end
 end

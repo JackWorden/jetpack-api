@@ -19,7 +19,11 @@ Rails.application.routes.draw do
     resources :issues,  only: [:index, :create]
   end
 
-  resources :issues,  only: [:show, :update, :destroy]
+  resources :issues,  only: [:show, :update, :destroy] do
+    member do
+      patch 'assignee'
+    end
+  end
 
   resources :users do
     collection do

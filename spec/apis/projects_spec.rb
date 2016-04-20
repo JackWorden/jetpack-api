@@ -146,12 +146,20 @@ describe 'Project Requests', :no_auth, type: :api do
   describe 'GET /projects/:id/sprints' do
     context 'when the project exists' do
       let(:project) { FactoryGirl.create(Project) }
-      let!(:sprint) { FactoryGirl.create(Sprint, project: project) }
-      let!(:sprint2) { FactoryGirl.create(Sprint, project: project) }
+      let(:sprint) { FactoryGirl.create(Sprint, project: project) }
+      let(:story) { FactoryGirl.create(Story, project: project, sprint: sprint) }
+
+      before do
+        FactoryGirl.create(Issue, story: story, project: project, sprint: sprint)
+        FactoryGirl.create(Issue, project: project, sprint: sprint)
+
+        get project_path(project)
+        @parsed_response = JSON::API.parse(response.body)
+      end
 
       it "should return the project's sprints" do
-        get "/projects/#{project.id}/sprints"
-        expect(response_body_json.size).to eq 2
+        expect(@parsed_response.included[0].id).to eq sprint.id.to_s
+        expect(@parsed_response.included[0].relationships.stories.data[0].id).to eq story.id.to_s
       end
     end
 
