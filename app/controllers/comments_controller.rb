@@ -3,7 +3,7 @@ class CommentsController < ApplicationController
   before_action :set_issue, only: [:index, :create]
 
   def index
-    render json: @isue.comments
+    render json: @issue.comments
   end
 
   def show

@@ -15,6 +15,7 @@ class Issue < ActiveRecord::Base
   belongs_to :sprint
   belongs_to :story
   belongs_to :assignee, class_name: 'User'
+  has_many :comments
 
   enum status: { todo: 'todo', in_progress: 'in progress', completed: 'completed' }
 

@@ -26,4 +26,10 @@ FactoryGirl.define do
     sequence(:description) { |i| "Issue ##{i}" }
     project
   end
+
+  factory :comment do
+    body 'This is a comment...'
+    issue
+    user
+  end
 end
