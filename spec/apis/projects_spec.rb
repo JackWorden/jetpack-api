@@ -175,9 +175,7 @@ describe 'Project Requests', :no_auth, type: :api do
     context 'when the projet exists' do
       let(:project) { FactoryGirl.create(Project) }
 
-      before do
-        3.times { FactoryGirl.create(Issue, project: project) }
-      end
+      before { FactoryGirl.create_list(Issue, 3, project: project) }
 
       it "should return the project's issue backlog" do
         get "/projects/#{project.id}/issue_backlog"
