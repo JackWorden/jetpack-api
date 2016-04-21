@@ -23,7 +23,11 @@ Rails.application.routes.draw do
     member do
       patch 'assignee'
     end
+
+    resources :comments, only: [:index, :create]
   end
+
+  resources :comments, only: [:show, :update, :destroy]
 
   resources :users do
     collection do
