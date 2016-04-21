@@ -3,6 +3,10 @@ Rails.application.routes.draw do
     resources :sprints, only: [:index, :create]
     resources :stories, only: [:index, :create]
     resources :issues,  only: [:index, :create]
+
+    member do
+      get 'issue_backlog'
+    end
   end
 
   resources :sprints, only: [:show, :update, :destroy] do

@@ -21,4 +21,8 @@ class Project < ActiveRecord::Base
   validates :name, presence: true
 
   default_scope { order(name: :asc) }
+
+  def issue_backlog
+    Issue.where(sprint_id: nil, story_id: nil)
+  end
 end

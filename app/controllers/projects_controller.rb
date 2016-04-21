@@ -40,6 +40,14 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def issue_backlog
+    if @project
+      render json: @project.issue_backlog
+    else
+      render nothing: true, status: :bad_request
+    end
+  end
+
   private
 
   def set_project
