@@ -28,8 +28,8 @@ ActiveRecord::Schema.define(version: 20160419175156) do
     t.string   "name",             null: false
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
-    t.integer  "active_sprint_id"
     t.integer  "team_id"
+    t.integer  "active_sprint_id"
   end
 
   add_index "projects", ["team_id"], name: "index_projects_on_team_id", using: :btree
@@ -47,10 +47,13 @@ ActiveRecord::Schema.define(version: 20160419175156) do
   end
 
   create_table "teams", force: :cascade do |t|
-    t.string   "name",       null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "name",        null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "projects_id"
   end
+
+  add_index "teams", ["projects_id"], name: "index_teams_on_projects_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.datetime "created_at",          null: false

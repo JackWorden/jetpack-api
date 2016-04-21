@@ -8,7 +8,7 @@ class TeamsController < ApplicationController
 
   def show
     return no_team unless @team
-    render json: @current_user.team
+    render json: @current_user.team, include: 'users'
   end
 
   def destroy
