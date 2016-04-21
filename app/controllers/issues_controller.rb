@@ -6,7 +6,7 @@ class IssuesController < ApplicationController
   end
 
   def show
-    render json: @issue, status: :ok
+    render json: @issue, include: 'comments', status: :ok
   end
 
   def update
