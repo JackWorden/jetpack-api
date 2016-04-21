@@ -12,7 +12,7 @@ module API
     def find_or_create_user
       User.where(github_id: github_user.id).first_or_initialize.tap do |user|
         user.github_access_token = access_token
-        user.name = github_user.name.presence || github_user.login.presence
+        user.name = github_user.name || github_user.login
         user.profile_picture_url = github_user.avatar_url
         user.save
       end
