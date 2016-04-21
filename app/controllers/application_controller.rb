@@ -16,7 +16,7 @@ class ApplicationController < ActionController::API
   end
 
   def switch_teams
-    return unless @current_user.team
-    @current_user.team.switch
+    return unless @current_user.try!(:team)
+    @current_user.try!(:team).try!(:switch)
   end
 end
