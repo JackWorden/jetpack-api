@@ -172,20 +172,14 @@ describe 'Project Requests', :no_auth, type: :api do
   end
 
   describe 'GET /projects/:id/issue_backlog' do
-    context 'when the projet exists' do
+    context 'when the project exists' do
       let(:project) { FactoryGirl.create(Project) }
 
       before { FactoryGirl.create_list(Issue, 3, project: project) }
 
       it "should return the project's issue backlog" do
-        get "/projects/#{project.id}/issue_backlog"
+        get "/projects/#{project.id}/issues/backlog"
         expect(response_body_json.size).to eq 3
-      end
-    end
-    context 'when the project does not exist' do
-      it 'should return a bad request' do
-        get '/projects/-1/issue_backlog'
-        expect(response).to be_bad_request
       end
     end
   end

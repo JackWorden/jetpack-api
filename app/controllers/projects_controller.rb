@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, except: [:index, :create]
+  before_action :set_project, except: [:index, :create, :issue_backlog]
 
   def index
     render json: Project.all, status: :ok
@@ -41,11 +41,8 @@ class ProjectsController < ApplicationController
   end
 
   def issue_backlog
-    if @project
-      render json: @project.issue_backlog
-    else
-      render nothing: true, status: :bad_request
-    end
+    project = Project.find(params[:project_id])
+    render json: project.issue_backlog
   end
 
   private
