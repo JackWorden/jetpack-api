@@ -25,6 +25,9 @@ class Issue < ActiveRecord::Base
 
   before_save :reset_status, if: :backlog?
 
+  scope :active, -> { where.not(status: statuses[:completed]) }
+  scope :completed, -> { where(status: statuses[:completed]) }
+
   private
 
   def reset_status

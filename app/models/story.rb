@@ -16,16 +16,8 @@ class Story < ActiveRecord::Base
 
   validates :title, presence: true
 
-  def active_issues
-    issues.where.not(status: Issue.statuses[:completed])
-  end
-
-  def completed_issues
-    issues.where(status: Issue.statuses[:completed])
-  end
-
   def completed_points
-    completed_issues.sum(:points)
+    issues.completed.sum(:points)
   end
 
   def total_points
