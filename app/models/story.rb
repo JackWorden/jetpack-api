@@ -18,6 +18,8 @@ class Story < ActiveRecord::Base
 
   before_save :assign_to_project
 
+  default_scope { order(title: :asc) }
+
   def completed_points
     issues.completed.sum(:points)
   end

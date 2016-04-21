@@ -14,6 +14,8 @@ class Sprint < ActiveRecord::Base
 
   validates :project, presence: true
 
+  default_scope { order(end_date: :desc) }
+
   def duration
     (end_date - start_date).to_i
   end
