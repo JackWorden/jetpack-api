@@ -20,6 +20,11 @@ class TeamsController < ApplicationController
     render json: { errors: "Deletion failed: #{e.message}" }, status: :internal_server_error
   end
 
+  def seed
+    DataSeeder.new(@team, current_user).seed
+    render nothing: true, status: :no_content
+  end
+
   private
 
   def set_team
