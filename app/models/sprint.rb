@@ -5,6 +5,7 @@
 #  id         :integer          not null, primary key
 #  end_date   :date
 #  project_id :integer          not null
+#  start_date :date
 #
 
 class Sprint < ActiveRecord::Base

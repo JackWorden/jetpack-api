@@ -6,8 +6,10 @@
 #  project_id  :integer          not null
 #  sprint_id   :integer
 #  story_id    :integer
-#  user_id     :integer
+#  assignee_id :integer
 #  description :text
+#  points      :integer          default("1"), not null
+#  status      :string           default("todo")
 #
 
 class Issue < ActiveRecord::Base
