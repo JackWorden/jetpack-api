@@ -25,6 +25,7 @@ class Issue < ActiveRecord::Base
   validates :points, numericality: { greater_than: 0 }
 
   before_save :reset_status, if: :backlog?
+  before_save :assign_to_project
 
   scope :active, -> { where.not(status: statuses[:completed]) }
   scope :completed, -> { where(status: statuses[:completed]) }
@@ -33,6 +34,10 @@ class Issue < ActiveRecord::Base
 
   def reset_status
     self.status = self.class.statuses[:todo]
+  end
+
+  def assign_to_project
+    self.project = (sprint || story).project if project.nil?
   end
 
   def backlog?

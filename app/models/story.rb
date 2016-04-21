@@ -16,6 +16,8 @@ class Story < ActiveRecord::Base
 
   validates :title, presence: true
 
+  before_save :assign_to_project
+
   def completed_points
     issues.completed.sum(:points)
   end
@@ -33,6 +35,10 @@ class Story < ActiveRecord::Base
   end
 
   private
+
+  def assign_to_project
+    self.project = sprint.project if project.nil?
+  end
 
   def debt_calculator
     @debt_calculator ||= DebtCalculator.new(self)
