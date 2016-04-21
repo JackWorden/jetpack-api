@@ -66,7 +66,11 @@ class IssuesController < ApplicationController
   end
 
   def issue_params
-    params.require(:issue).permit(:id, :description, :project_id, :sprint_id, :story_id)
+    params.require(:issue).permit(*issue_fields)
+  end
+
+  def issue_fields
+    [:id, :description, :status, :points, :project_id, :sprint_id, :story_id].freeze
   end
 
   def set_issue

@@ -13,4 +13,8 @@ class Sprint < ActiveRecord::Base
   has_many :issues
 
   validates :project, presence: true
+
+  def duration
+    (end_date - start_date).to_i
+  end
 end

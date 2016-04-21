@@ -43,6 +43,7 @@ class SprintsController < ApplicationController
   def activate
     if @sprint
       @sprint.project.update(active_sprint_id: @sprint.id)
+      @sprint.update(start_date: Date.today)
       render nothing: true, status: :no_content
     else
       render nothing: true, status: :bad_request
@@ -52,6 +53,7 @@ class SprintsController < ApplicationController
   def deactivate
     if @sprint
       @sprint.project.update(active_sprint_id: nil)
+      @sprint.update(start_date: nil)
       render nothing: true, status: :no_content
     else
       render nothing: true, status: :bad_request

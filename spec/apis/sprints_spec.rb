@@ -100,6 +100,11 @@ describe 'Sprints Requests', :no_auth, type: :api do
       post "/sprints/#{sprint.id}/activate"
       expect(project.reload.active_sprint).to eq sprint
     end
+
+    it 'should set its start date to today' do
+      post "/sprints/#{sprint.id}/activate"
+      expect(sprint.reload.start_date).to eq Date.today
+    end
   end
 
   describe 'POST /sprints/:id/deactivate' do
@@ -113,6 +118,11 @@ describe 'Sprints Requests', :no_auth, type: :api do
     it 'should make the sprint inactive for its project' do
       post "/sprints/#{sprint.id}/deactivate"
       expect(project.reload.active_sprint).to be_nil
+    end
+
+    it 'should set its start date to nil' do
+      post "/sprints/#{sprint.id}/deactivate"
+      expect(sprint.reload.start_date).to eq nil
     end
   end
 end
