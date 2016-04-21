@@ -39,9 +39,6 @@ Rails.application.routes.draw do
     end
   end
 
-  resource :teams, only: [:show, :create, :destroy] do
-    member do
-      post 'seed'
-    end
-  end
+  resource :teams, only: [:show, :create, :destroy]
+  post '/teams/:id/seed', to: 'teams#seed'
 end

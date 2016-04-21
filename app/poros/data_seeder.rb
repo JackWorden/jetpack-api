@@ -16,7 +16,7 @@ class DataSeeder
 
   def create_seed_data
     2.times do
-      Project.create(name: "Sample Project ##{i}").tap do |project|
+      Project.create(name: "Sample Project ##{Project.count}").tap do |project|
         create_sprints_for(project)
         create_stories_for(project, project_id: project.id)
         create_issues_for(project, project_id: project.id)
