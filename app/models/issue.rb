@@ -18,6 +18,7 @@ class Issue < ActiveRecord::Base
 
   validates :description, presence: true
   validates :assignee, presence: true, if: :assigned?
+  validates :points, numericality: { greater_than: 0 }
 
   private
 
