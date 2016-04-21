@@ -16,11 +16,24 @@ class Issue < ActiveRecord::Base
   belongs_to :story
   belongs_to :assignee, class_name: 'User'
 
+  enum status: { todo: 'todo', in_progress: 'in progress', completed: 'completed' }
+
   validates :description, presence: true
   validates :assignee, presence: true, if: :assigned?
+  validates :sprint, presence: true, unless: :backlog?
   validates :points, numericality: { greater_than: 0 }
 
+  before_save :reset_status, if: :backlog?
+
   private
+
+  def reset_status
+    self.status = self.class.statuses[:todo]
+  end
+
+  def backlog?
+    sprint_id.nil?
+  end
 
   def assigned?
     assignee_id.present?
