@@ -12,7 +12,7 @@
 class Story < ActiveRecord::Base
   belongs_to :project
   belongs_to :sprint
-  has_many :issues
+  has_many :issues, dependent: :destroy
 
   validates :title, presence: true
 

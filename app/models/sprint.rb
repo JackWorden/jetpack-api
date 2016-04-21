@@ -9,8 +9,8 @@
 
 class Sprint < ActiveRecord::Base
   belongs_to :project
-  has_many :stories
-  has_many :issues
+  has_many :stories, dependent: :destroy
+  has_many :issues, dependent: :destroy
 
   validates :project, presence: true
 
