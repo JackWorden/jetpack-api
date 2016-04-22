@@ -2,16 +2,16 @@ class IssuesController < ApplicationController
   before_action :set_issue, except: [:create, :index]
 
   def index
-    render json: issue_parent.issues
+    render json: issue_parent.issues, include: 'assignee'
   end
 
   def show
-    render json: @issue, include: 'comments', status: :ok
+    render json: @issue, include: %w(comments assignee), status: :ok
   end
 
   def update
     if @issue.update(issue_params)
-      render json: @issue
+      render json: @issue, include: 'assignee'
     else
       render nothing: true, status: :bad_request
     end
@@ -26,7 +26,7 @@ class IssuesController < ApplicationController
     @issue = issue_parent.issues.new(issue_params)
 
     if @issue.save
-      render json: @issue, status: :ok
+      render json: @issue, include: 'assignee', status: :ok
     else
       render nothing: true, status: :bad_request
     end
