@@ -43,6 +43,10 @@ class IssuesController < ApplicationController
     render json: { errors: e.message }, status: :bad_request
   end
 
+  def order
+    
+  end
+
   private
 
   def user
