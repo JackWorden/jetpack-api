@@ -44,9 +44,9 @@ class SprintsController < ApplicationController
     if @sprint
       @sprint.project.update(active_sprint_id: @sprint.id)
       @sprint.update(start_date: Date.today)
-      render nothing: true, status: :no_content
+      render json: @sprint
     else
-      render nothing: true, status: :bad_request
+      render json: @sprint, status: :bad_request
     end
   end
 
@@ -54,9 +54,9 @@ class SprintsController < ApplicationController
     if @sprint
       @sprint.project.update(active_sprint_id: nil)
       @sprint.update(start_date: nil)
-      render nothing: true, status: :no_content
+      render json: @sprint
     else
-      render nothing: true, status: :bad_request
+      render json: @sprint, status: :bad_request
     end
   end
 

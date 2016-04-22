@@ -18,6 +18,8 @@ class Sprint < ActiveRecord::Base
   before_destroy :reset_children_sprint_ids
 
   validates :project, presence: true
+  validates :end_date, presence: true
+  validate :end_date_must_be_in_future
 
   def duration
     (end_date - start_date).to_i
@@ -32,5 +34,9 @@ class Sprint < ActiveRecord::Base
   def reset_children_sprint_ids
     stories.update_all(sprint_id: nil)
     issues.update_all(sprint_id: nil)
+  end
+
+  def end_date_must_be_in_future
+    errors.add(:end_date, 'must be in the future') unless end_date > Time.zone.today
   end
 end

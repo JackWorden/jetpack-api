@@ -1,6 +1,7 @@
 class StorySerializer < ApplicationSerializer
   attributes :id, :title, :description
   attribute :total_points
+  attribute :completed_points
   attribute :expected_points, if: :in_active_sprint?
   attribute :debt, if: :in_active_sprint?
 
