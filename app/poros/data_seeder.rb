@@ -1,7 +1,6 @@
 class DataSeeder
-  def initialize(team, user)
+  def initialize(team)
     @team = team
-    @user = user
   end
 
   def seed
@@ -10,7 +9,7 @@ class DataSeeder
 
   protected
 
-  attr_reader :team, :user
+  attr_reader :team, :users
 
   private
 
@@ -21,6 +20,15 @@ class DataSeeder
         create_stories_for(project, project_id: project.id)
         create_issues_for(project, project_id: project.id)
       end
+    end
+
+    3.times do |i|
+      User.create(
+        team: team,
+        name: "Sample User ##{i}",
+        github_id: 'meh',
+        profile_picture_url: "https://randomuser.me/api/portraits/men/#{i}.jpg"
+      )
     end
   end
 
@@ -49,7 +57,7 @@ class DataSeeder
         description: "Sample Issue ##{Issue.count}",
         points: rand(1..5),
         status: Issue.statuses.values.sample,
-        assignee: [nil, user].sample,
+        assignee: users.sample,
         project_id: project_id
       )
       create_comments_for(issue)
@@ -58,7 +66,11 @@ class DataSeeder
 
   def create_comments_for(issue)
     rand(2..5).times do
-      issue.comments.create(body: "Sample Comment ##{Comment.count}", user: user)
+      issue.comments.create(body: "Sample Comment ##{Comment.count}", user: users.sample)
     end
+  end
+
+  def users
+    @users ||= team.users
   end
 end

@@ -21,7 +21,7 @@ class TeamsController < ApplicationController
   end
 
   def seed
-    DataSeeder.new(@team, current_user).seed
+    DataSeeder.new(@team).seed
     render nothing: true, status: :no_content
   end
 
