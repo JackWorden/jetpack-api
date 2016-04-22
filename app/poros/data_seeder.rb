@@ -4,6 +4,7 @@ class DataSeeder
   end
 
   def seed
+    create_users
     create_seed_data
   end
 
@@ -13,15 +14,7 @@ class DataSeeder
 
   private
 
-  def create_seed_data
-    2.times do
-      Project.create(name: "Sample Project ##{Project.count}").tap do |project|
-        create_sprints_for(project)
-        create_stories_for(project, project_id: project.id)
-        create_issues_for(project, project_id: project.id)
-      end
-    end
-
+  def create_users
     3.times do |i|
       User.create(
         team: team,
@@ -29,6 +22,16 @@ class DataSeeder
         github_id: 'meh',
         profile_picture_url: "https://randomuser.me/api/portraits/men/#{i}.jpg"
       )
+    end
+  end
+
+  def create_seed_data
+    2.times do
+      Project.create(name: "Sample Project ##{Project.count}").tap do |project|
+        create_sprints_for(project)
+        create_stories_for(project, project_id: project.id)
+        create_issues_for(project, project_id: project.id)
+      end
     end
   end
 
