@@ -71,9 +71,9 @@ ActiveRecord::Schema.define(version: 20160421212212) do
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
     t.integer  "team_id"
-    t.string   "name",                null: false
-    t.integer  "github_id",           null: false
     t.string   "token"
+    t.string   "name"
+    t.string   "github_id"
     t.string   "github_access_token"
     t.string   "profile_picture_url"
   end

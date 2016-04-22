@@ -6,8 +6,10 @@
 #  project_id  :integer          not null
 #  sprint_id   :integer
 #  story_id    :integer
-#  user_id     :integer
+#  assignee_id :integer
 #  description :text
+#  points      :integer          default("1"), not null
+#  status      :string           default("todo")
 #
 
 class Issue < ActiveRecord::Base
@@ -15,7 +17,7 @@ class Issue < ActiveRecord::Base
   belongs_to :sprint
   belongs_to :story
   belongs_to :assignee, class_name: 'User'
-  has_many :comments
+  has_many :comments, dependent: :destroy
 
   enum status: { todo: 'todo', in_progress: 'in progress', completed: 'completed' }
 

@@ -13,10 +13,11 @@
 class Project < ActiveRecord::Base
   belongs_to :team
 
-  has_many :sprints
+  has_many :sprints, dependent: :destroy
+  has_many :stories, dependent: :destroy
+  has_many :issues, dependent: :destroy
+
   belongs_to :active_sprint, class_name: 'Sprint'
-  has_many :stories
-  has_many :issues
 
   validates :name, presence: true
 
