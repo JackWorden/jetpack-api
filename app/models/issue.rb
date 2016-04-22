@@ -27,6 +27,7 @@ class Issue < ActiveRecord::Base
   before_save :reset_status, if: :backlog?
   before_save :assign_to_project
 
+  default_scope { order(id: :asc) }
   scope :active, -> { where.not(status: statuses[:completed]) }
   scope :completed, -> { where(status: statuses[:completed]) }
 
