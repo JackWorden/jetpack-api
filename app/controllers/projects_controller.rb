@@ -6,11 +6,7 @@ class ProjectsController < ApplicationController
   end
 
   def show
-    if @project
-      render json: @project, include: included_relationships
-    else
-      render nothing: true, status: :bad_request
-    end
+    render json: @project, include: included_relationships
   end
 
   def create
@@ -31,12 +27,8 @@ class ProjectsController < ApplicationController
   end
 
   def destroy
-    if @project
-      @project.destroy
-      render nothing: true, status: :no_content
-    else
-      render nothing: true, status: :bad_request
-    end
+    @project.destroy
+    render nothing: true, status: :no_content
   end
 
   def issue_backlog
@@ -47,7 +39,7 @@ class ProjectsController < ApplicationController
   private
 
   def set_project
-    @project = Project.find_by_id(params[:id])
+    @project = Project.find(params[:id])
   end
 
   def project_params
@@ -56,7 +48,7 @@ class ProjectsController < ApplicationController
 
   def included_relationships
     {
-      sprints: [ :issues, stories: { issues: :assignee } ]
+      sprints: [:issues, stories: { issues: :assignee }]
     }
   end
 end

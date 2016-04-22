@@ -33,9 +33,7 @@ describe 'Project Requests', :no_auth, type: :api do
 
     context 'when the project does not exist' do
       it 'should return an empty string with a bad request status' do
-        get project_path(-1)
-        expect(response.body).to be_blank
-        expect(response).to be_bad_request
+        expect { get project_path(-1) }.to raise_error(ActiveRecord::RecordNotFound)
       end
     end
   end
@@ -137,8 +135,7 @@ describe 'Project Requests', :no_auth, type: :api do
 
     context 'when the project does not exist' do
       it 'should have a bad request status' do
-        delete '/projects/-1'
-        expect(response).to be_bad_request
+        expect { delete project_path(-1) }.to raise_error(ActiveRecord::RecordNotFound)
       end
     end
   end
@@ -165,8 +162,7 @@ describe 'Project Requests', :no_auth, type: :api do
 
     context 'when the project does not exist' do
       it 'should return a bad request' do
-        get '/projects/-1'
-        expect(response).to be_bad_request
+        expect { get project_path(-1) }.to raise_error(ActiveRecord::RecordNotFound)
       end
     end
   end

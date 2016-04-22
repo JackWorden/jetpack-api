@@ -47,8 +47,7 @@ describe 'Sprints Requests', :no_auth, type: :api do
 
     context 'when the sprint does not exist' do
       it 'should have a bad request status' do
-        get '/sprints/-1'
-        expect(response).to be_bad_request
+        expect { get sprint_path(-1) }.to raise_error(ActiveRecord::RecordNotFound)
       end
     end
   end
@@ -79,8 +78,7 @@ describe 'Sprints Requests', :no_auth, type: :api do
 
     context 'when the delete is not successful' do
       it 'should have a bad request status' do
-        delete sprint_path(-1)
-        expect(response).to be_bad_request
+        expect { delete sprint_path(-1) }.to raise_error(ActiveRecord::RecordNotFound)
       end
     end
   end

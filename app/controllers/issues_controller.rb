@@ -13,7 +13,7 @@ class IssuesController < ApplicationController
     if @issue.update(issue_params)
       render json: @issue, include: 'assignee'
     else
-      render nothing: true, status: :bad_request
+      render json: @issue, status: :bad_request
     end
   end
 
@@ -28,7 +28,7 @@ class IssuesController < ApplicationController
     if @issue.save
       render json: @issue, include: 'assignee', status: :ok
     else
-      render nothing: true, status: :bad_request
+      render json: @issue, status: :bad_request
     end
   end
 

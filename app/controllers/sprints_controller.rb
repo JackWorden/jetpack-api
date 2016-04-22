@@ -16,11 +16,7 @@ class SprintsController < ApplicationController
   end
 
   def show
-    if @sprint
-      render json: @sprint, status: :ok
-    else
-      render nothing: true, status: :bad_request
-    end
+    render json: @sprint
   end
 
   def update
@@ -32,38 +28,26 @@ class SprintsController < ApplicationController
   end
 
   def destroy
-    if @sprint
-      @sprint.destroy
-      render nothing: true, status: :no_content
-    else
-      render nothing: true, status: :bad_request
-    end
+    @sprint.destroy
+    render nothing: true, status: :no_content
   end
 
   def activate
-    if @sprint
-      @sprint.project.update(active_sprint_id: @sprint.id)
-      @sprint.update(start_date: Date.today)
-      render json: @sprint
-    else
-      render json: @sprint, status: :bad_request
-    end
+    @sprint.project.update(active_sprint_id: @sprint.id)
+    @sprint.update(start_date: Date.today)
+    render json: @sprint
   end
 
   def deactivate
-    if @sprint
-      @sprint.project.update(active_sprint_id: nil)
-      @sprint.update(start_date: nil)
-      render json: @sprint
-    else
-      render json: @sprint, status: :bad_request
-    end
+    @sprint.project.update(active_sprint_id: nil)
+    @sprint.update(start_date: nil)
+    render json: @sprint
   end
 
   private
 
   def set_sprint
-    @sprint = Sprint.find_by_id(params[:id])
+    @sprint = Sprint.find(params[:id])
   end
 
   def sprint_params

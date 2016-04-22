@@ -16,7 +16,7 @@ class CommentsController < ApplicationController
     if @comment.save
       render json: @comment, status: :ok
     else
-      render nothing: true, status: :bad_request
+      render json: @comment, status: :bad_request
     end
   end
 
@@ -24,7 +24,7 @@ class CommentsController < ApplicationController
     if @comment.update(comment_params)
       render json: @comment
     else
-      render nothing: true, status: :bad_request
+      render json: @comment, status: :bad_request
     end
   end
 
