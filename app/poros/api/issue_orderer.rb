@@ -6,7 +6,7 @@ module API
 
     def call
       issue_hash = Issue.find(order).index_by(&:id)
-      set_positions(issue_hash)
+      change_orders(issue_hash)
       save_issues(issue_hash).sort { |a, b| a.order <=> b.order }
     end
 
@@ -16,7 +16,7 @@ module API
 
     private
 
-    def set_positions(issue_hash)
+    def change_orders(issue_hash)
       order.each_with_index do |id, pos|
         issue_hash[id].order = pos
       end

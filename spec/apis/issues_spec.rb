@@ -156,7 +156,7 @@ RSpec.describe 'Issue Requests', :no_auth, type: :api do
         patch(
           "/stories/#{story.id}/issues/order",
           json_data,
-          { 'Content-Type' => 'application/json'}
+          'Content-Type' => 'application/json'
         )
 
         expect(response_body_json[0]['id']).to eq issue2.id.to_s
