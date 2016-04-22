@@ -11,6 +11,7 @@ gem 'octokit', '~> 4.0'
 gem 'jsonapi_parser', '~>0.5'
 gem 'rest-client'
 gem 'rack-cors', require: 'rack/cors'
+gem 'faker'
 
 group :production do
   gem 'rails_12factor'

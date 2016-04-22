@@ -18,7 +18,7 @@ class DataSeeder
     3.times do |i|
       User.create(
         team: team,
-        name: "Sample User ##{i}",
+        name: Faker::Name.name,
         github_id: 'meh',
         profile_picture_url: "https://randomuser.me/api/portraits/men/#{i}.jpg"
       )
