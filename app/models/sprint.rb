@@ -23,6 +23,10 @@ class Sprint < ActiveRecord::Base
     (end_date - start_date).to_i
   end
 
+  def active?
+    project.active_sprint == self
+  end
+
   private
 
   def reset_children_sprint_ids
