@@ -22,7 +22,7 @@ Rails.application.routes.draw do
   resources :stories, only: [:show, :update, :destroy] do
     resources :issues,  only: [:index, :create] do
       collection do
-        get 'order'
+        patch 'order'
       end
     end
   end
