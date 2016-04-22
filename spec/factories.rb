@@ -13,7 +13,7 @@ FactoryGirl.define do
   end
 
   factory :sprint do
-    end_date { Time.zone.today + rand(0..30).days }
+    end_date { Time.zone.today + rand(1..30).days }
     project
   end
 
