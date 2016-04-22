@@ -19,7 +19,7 @@ class Sprint < ActiveRecord::Base
 
   validates :project, presence: true
   validates :end_date, presence: true
-  validate :end_date_must_be_in_future
+  validate :end_date_must_be_in_future, if: :new_record?
 
   def duration
     (end_date - start_date).to_i
