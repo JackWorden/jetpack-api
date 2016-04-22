@@ -12,11 +12,12 @@
 class Story < ActiveRecord::Base
   belongs_to :project
   belongs_to :sprint
-  has_many :issues, dependent: :destroy
+  has_many :issues
 
   validates :title, presence: true
 
   before_save :assign_to_project
+  before_destroy :reset_children_story_ids
 
   default_scope { order(title: :asc) }
 
@@ -37,6 +38,10 @@ class Story < ActiveRecord::Base
   end
 
   private
+
+  def reset_children_story_ids
+    issues.update_all(story_id: nil)
+  end
 
   def assign_to_project
     self.project = sprint.project if project.nil?

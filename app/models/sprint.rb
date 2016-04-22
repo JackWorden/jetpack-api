@@ -10,8 +10,10 @@
 
 class Sprint < ActiveRecord::Base
   belongs_to :project
-  has_many :stories, dependent: :destroy
-  has_many :issues, dependent: :destroy
+  has_many :stories
+  has_many :issues
+
+  before_destroy :reset_children_sprint_ids
 
   validates :project, presence: true
 
@@ -19,5 +21,12 @@ class Sprint < ActiveRecord::Base
 
   def duration
     (end_date - start_date).to_i
+  end
+
+  private
+
+  def reset_children_sprint_ids
+    stories.update_all(sprint_id: nil)
+    issues.update_all(sprint_id: nil)
   end
 end
