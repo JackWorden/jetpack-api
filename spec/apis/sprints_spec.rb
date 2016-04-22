@@ -33,10 +33,6 @@ describe 'Sprints Requests', :no_auth, type: :api do
         expect(response_attributes_json['name']).to eq sprint_params[:name]
       end
     end
-
-    context 'when the create is unsuccessful' do
-      pending 'model has no validations'
-    end
   end
 
   describe 'GET /sprints/:id' do
@@ -68,10 +64,6 @@ describe 'Sprints Requests', :no_auth, type: :api do
         put sprint_path(sprint), sprint: sprint_params
         expect(response_attributes_json['end-date']).to eq sprint_params[:end_date].as_json
       end
-    end
-
-    context 'when the update is not successful' do
-      pending 'model has no validations'
     end
   end
 

@@ -38,8 +38,8 @@ ActiveRecord::Schema.define(version: 20160421023944) do
     t.string   "name",             null: false
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
-    t.integer  "team_id"
     t.integer  "active_sprint_id"
+    t.integer  "team_id"
   end
 
   add_index "projects", ["team_id"], name: "index_projects_on_team_id", using: :btree
@@ -67,9 +67,9 @@ ActiveRecord::Schema.define(version: 20160421023944) do
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
     t.integer  "team_id"
+    t.string   "name",                null: false
+    t.integer  "github_id",           null: false
     t.string   "token"
-    t.string   "name"
-    t.string   "github_id"
     t.string   "github_access_token"
     t.string   "profile_picture_url"
   end

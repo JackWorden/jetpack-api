@@ -12,7 +12,4 @@ class StorySerializer < ApplicationSerializer
     return unless object.sprint
     object.sprint == object.project.active_sprint
   end
-
-  link(:self) { story_path(object) }
-  link(:issues) { story_issues_path(object) }
 end

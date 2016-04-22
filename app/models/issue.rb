@@ -41,11 +41,11 @@ class Issue < ActiveRecord::Base
   end
 
   def assign_to_project
-    self.project = (sprint || story).project if project.nil?
+    self.project = (sprint || story).try!(:project) if project.nil?
   end
 
   def assign_to_sprint
-    self.sprint = story.sprint if sprint.nil?
+    self.sprint = story.try!(:sprint) if sprint.nil?
   end
 
   def backlog?
