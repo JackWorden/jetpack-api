@@ -29,6 +29,10 @@ class Sprint < ActiveRecord::Base
     project.active_sprint == self
   end
 
+  def completed?
+    end_date < Date.today
+  end
+
   private
 
   def reset_children_sprint_ids

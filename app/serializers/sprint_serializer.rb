@@ -1,5 +1,5 @@
 class SprintSerializer < ApplicationSerializer
-  attributes :id, :project_id, :end_date, :active
+  attributes :id, :project_id, :end_date, :active, :completed
   has_many :stories
   has_many :issues
 
@@ -9,5 +9,9 @@ class SprintSerializer < ApplicationSerializer
 
   def active
     object.active?
+  end
+
+  def completed
+    object.completed?
   end
 end
