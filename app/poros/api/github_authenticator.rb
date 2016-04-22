@@ -6,7 +6,13 @@ module API
 
     def user
       return nil unless github_user
-      find_or_create_user
+
+      find_or_create_user.tap do |user|
+        Team.where(id: user.team_id).first_or_create do |team|
+          team.update(name: 'Zebras Playing Bingo')
+          user.update(team: team)
+        end
+      end
     end
 
     def find_or_create_user
