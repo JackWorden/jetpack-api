@@ -7,8 +7,7 @@ class ProjectsController < ApplicationController
 
   def show
     if @project
-      render json: @project,
-             include: %w(sprints sprints.stories sprints.issues sprints.stories.issues sprints.stories.issues.assignee)
+      render json: @project, include: included_relationships
     else
       render nothing: true, status: :bad_request
     end
@@ -53,5 +52,11 @@ class ProjectsController < ApplicationController
 
   def project_params
     params.require(:project).permit(:id, :name)
+  end
+
+  def included_relationships
+    {
+      sprints: [ :issues, stories: { issues: :assignee } ]
+    }
   end
 end
