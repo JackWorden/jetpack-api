@@ -1,4 +1,4 @@
-class StorySerializer < ActiveModel::Serializer
+class StorySerializer < ApplicationSerializer
   attributes :id, :title, :description
   attribute :total_points
   attribute :expected_points, if: :in_active_sprint?
@@ -11,4 +11,7 @@ class StorySerializer < ActiveModel::Serializer
     return unless object.sprint
     object.sprint == object.project.active_sprint
   end
+
+  link(:self) { story_path(object) }
+  link(:issues) { story_issues_path(object) }
 end

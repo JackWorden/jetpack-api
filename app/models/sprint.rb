@@ -9,6 +9,8 @@
 #
 
 class Sprint < ActiveRecord::Base
+  default_scope -> { order(:end_date) }
+
   belongs_to :project
   has_many :stories
   has_many :issues
@@ -16,8 +18,6 @@ class Sprint < ActiveRecord::Base
   before_destroy :reset_children_sprint_ids
 
   validates :project, presence: true
-
-  default_scope { order(end_date: :desc) }
 
   def duration
     (end_date - start_date).to_i

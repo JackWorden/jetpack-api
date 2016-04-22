@@ -1,4 +1,4 @@
-class UserSerializer < ActiveModel::Serializer
+class UserSerializer < ApplicationSerializer
   attributes :id, :name, :profile_picture_url
 
   attribute :token, if: :current_user_is_user?

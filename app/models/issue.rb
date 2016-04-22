@@ -43,6 +43,10 @@ class Issue < ActiveRecord::Base
     self.project = (sprint || story).project if project.nil?
   end
 
+  def assign_to_sprint
+    self.sprint = story.sprint if sprint.nil?
+  end
+
   def backlog?
     sprint_id.nil?
   end

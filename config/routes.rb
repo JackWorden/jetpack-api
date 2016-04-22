@@ -40,5 +40,6 @@ Rails.application.routes.draw do
   end
 
   resource :teams, only: [:show, :create, :destroy]
+  resources :users, only: [:index]
   post '/teams/:id/seed', to: 'teams#seed'
 end

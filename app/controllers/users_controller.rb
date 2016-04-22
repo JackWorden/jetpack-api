@@ -3,11 +3,15 @@ class UsersController < ApplicationController
 
   skip_before_filter :authenticate, only: [:from_token]
 
+  def index
+    render json: User.all
+  end
+
   def from_token
     @current_user = API::GithubAuthenticator.new(params[:code]).user
 
     if @current_user
-      render json: @current_user, status: :ok
+      render json: @current_user
     else
       render nothing: true, status: :unauthorized
     end
