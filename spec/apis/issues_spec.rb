@@ -150,7 +150,7 @@ RSpec.describe 'Issue Requests', :no_auth, type: :api do
       let!(:issue1) { FactoryGirl.create(Issue, story: story, order: 1) }
       let!(:issue2) { FactoryGirl.create(Issue, story: story, order: 2) }
 
-      let(:json_data) { { 'issue_order': [issue2.id, issue1.id] }.to_json }
+      let(:json_data) { { 'issue_order' => [issue2.id, issue1.id] }.to_json }
 
       it "should set the issues' order and return them in the order given" do
         patch(
