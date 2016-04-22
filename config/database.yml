@@ -4,7 +4,8 @@ development:
   database: jetpack-api_development
   pool: 5
   username: jetpack-api
-  password:
+  host: localhost
+  password: ''
 
 test:
   adapter: postgresql
@@ -12,6 +13,7 @@ test:
   database: jetpack-api_test
   pool: 5
   username: jetpack-api
-  password:
+  password: ''
+  host: localhost
 
 # Heroku is cool
