@@ -1,4 +1,4 @@
-FROM ruby:2.3
+FROM ruby:2.2
 
 RUN apt-get update && apt-get install -y build-essential \
   libssl-dev \
@@ -13,3 +13,4 @@ WORKDIR /jetpack
 
 COPY Gemfile Gemfile.lock ./
 RUN bundle install
+COPY . ./
