@@ -17,6 +17,9 @@ Dir.chdir APP_ROOT do
   #   system "cp config/database.yml.sample config/database.yml"
   # end
 
+  puts "\n== Creating database user"
+  system 'createuser -s jetpack-api'
+
   puts "\n== Preparing database =="
   system 'bin/rake db:setup'
 
@@ -24,6 +27,6 @@ Dir.chdir APP_ROOT do
   system 'rm -f log/*'
   system 'rm -rf tmp/cache'
 
-  puts "\n== Restarting application server =="
+  puts "\n== Restarting application server if it's running =="
   system 'touch tmp/restart.txt'
 end
