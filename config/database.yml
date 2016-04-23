@@ -16,4 +16,10 @@ test:
   password: ''
   host: localhost
 
-# Heroku is cool
+production:
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  username: postgres
+  password: ''
+  host: db
