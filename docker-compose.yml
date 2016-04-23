@@ -1,0 +1,20 @@
+version: '2'
+services:
+  db:
+    image: postgres
+  web:
+    image: gregkwhite/jetpack-api
+    command: bundle exec rails s -p 3000 -b '0.0.0.0'
+    volumes:
+      - .:/ohvv
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    environment:
+      - LANG=en_US.UTF-8
+      - RACK_ENV=development
+      - RAILS_ENV=development
+      - GITHUB_CLIENT_ID=cf34f0bbe741ea49fe50
+      - GITHUB_CLIENT_SECRET=ee56f7376bd76b7897ee7bc4ab2c19eb6ce77ac3
+      - DATABASE_URL="postgres://postgres@db:5432/postgres"
