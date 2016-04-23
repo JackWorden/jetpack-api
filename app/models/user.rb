@@ -19,6 +19,8 @@ class User < ActiveRecord::Base
 
   before_create :generate_token
 
+  default_scope { order(name: :asc) }
+
   private
 
   def generate_token
